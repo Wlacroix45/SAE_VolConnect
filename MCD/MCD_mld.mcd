@@ -1,0 +1,25 @@
+%%mocodo
+:
+TERMINAL: id_terminal, nom, #id_aeroport > AEROPORT > id_aeroport
+:::
+AEROPORT: id_aeroport, nom, ville, pays
+:::
+
+
+:
+DATE: id_date, date, #id_terminal 1 > TERMINAL > id_terminal, #id_vol 1 > VOL > id_vol, #id_terminal 2 > TERMINAL > id_terminal, #id_vol 2 > VOL > id_vol
+:::::::
+
+
+:
+VOL: id_vol, nom_vol, #id_companie > COMPANIE > id_companie
+:::
+CORRESPONDANCE: id_correspondance, #id_aeroport > AEROPORT > id_aeroport, #id_vol > VOL > id_vol
+:
+LOCALISER: #id_companie > COMPANIE > id_companie, _#id_aeroport > AEROPORT > id_aeroport
+:
+
+
+:::
+COMPANIE: id_companie, nom_comp
+:::::
