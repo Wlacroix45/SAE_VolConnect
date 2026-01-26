@@ -1,0 +1,53 @@
+{
+  "width": 608,
+  "height": 381,
+  "cx": [
+    [ "PARTIR", 39 ],
+    [ "TERMINAL", 141 ],
+    [ "POSSEDER", 263 ],
+    [ "AEROPORT", 418 ],
+    [ "DATE", 141 ],
+    [ "FINALISER", 263 ],
+    [ "ARRETER", 418 ],
+    [ "VOL", 141 ],
+    [ "CORRESPONDRE", 263 ],
+    [ "CORRESPONDANCE", 418 ],
+    [ "LOCALISER", 557 ],
+    [ "APPARTENIR", 141 ],
+    [ "COMPANIE", 263 ]
+  ],
+  "cy": [
+    [ "PARTIR", 60 ],
+    [ "TERMINAL", 60 ],
+    [ "POSSEDER", 60 ],
+    [ "AEROPORT", 60 ],
+    [ "DATE", 161 ],
+    [ "FINALISER", 161 ],
+    [ "ARRETER", 161 ],
+    [ "VOL", 254 ],
+    [ "CORRESPONDRE", 254 ],
+    [ "CORRESPONDANCE", 254 ],
+    [ "LOCALISER", 254 ],
+    [ "APPARTENIR", 338 ],
+    [ "COMPANIE", 338 ]
+  ],
+  "shift": [
+    [ "PARTIR,TERMINAL,0", 0 ],
+    [ "PARTIR,VOL,0", 0 ],
+    [ "PARTIR,DATE,0", 0 ],
+    [ "POSSEDER,AEROPORT,0", 0 ],
+    [ "POSSEDER,TERMINAL,0", 0 ],
+    [ "FINALISER,TERMINAL,0", 0 ],
+    [ "FINALISER,VOL,0", 0 ],
+    [ "FINALISER,DATE,0", 0 ],
+    [ "ARRETER,AEROPORT,0", 0 ],
+    [ "ARRETER,CORRESPONDANCE,0", 0 ],
+    [ "CORRESPONDRE,CORRESPONDANCE,0", 0 ],
+    [ "CORRESPONDRE,VOL,0", 0 ],
+    [ "LOCALISER,COMPANIE,0", 0 ],
+    [ "LOCALISER,AEROPORT,0", 0 ],
+    [ "APPARTENIR,COMPANIE,0", 0 ],
+    [ "APPARTENIR,VOL,0", 0 ]
+  ],
+  "ratio": []
+}
