@@ -1,16 +1,16 @@
 {
-  "width": 433,
-  "height": 304,
+  "width": 418,
+  "height": 288,
   "cx": [
     [ "POSSEDER", 75 ],
-    [ "AEROPORT", 237 ],
-    [ "LOCALISER", 380 ],
+    [ "AEROPORT", 222 ],
+    [ "LOCALISER", 365 ],
     [ "TERMINAL", 75 ],
-    [ "ARRIVER", 237 ],
-    [ "COMPANIE", 380 ],
+    [ "ARRIVER", 222 ],
+    [ "COMPANIE", 365 ],
     [ "PARTIR", 75 ],
-    [ "VOL", 237 ],
-    [ "APPARTENIR", 380 ]
+    [ "VOL", 222 ],
+    [ "APPARTENIR", 365 ]
   ],
   "cy": [
     [ "POSSEDER", 60 ],
@@ -19,9 +19,9 @@
     [ "TERMINAL", 161 ],
     [ "ARRIVER", 161 ],
     [ "COMPANIE", 161 ],
-    [ "PARTIR", 253 ],
-    [ "VOL", 253 ],
-    [ "APPARTENIR", 253 ]
+    [ "PARTIR", 245 ],
+    [ "VOL", 245 ],
+    [ "APPARTENIR", 245 ]
   ],
   "shift": [
     [ "POSSEDER,AEROPORT,0", 0 ],

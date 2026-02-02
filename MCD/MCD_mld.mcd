@@ -14,5 +14,5 @@ companie: id_companie, nom_comp
 
 
 :::
-vol: id_vol, nom_vol, date_heure_depart 1, #id_terminal 1 > terminal > id_terminal, date_heure_arrivee, #id_terminal 2 > terminal > id_terminal, date_heure_depart 2, #id_companie > companie > id_companie
+vol: id_vol, nom_vol, #id_terminal 1 > terminal > id_terminal, date_heure_arrivee, #id_terminal 2 > terminal > id_terminal, date_heure_depart, #id_companie > companie > id_companie
 :::
