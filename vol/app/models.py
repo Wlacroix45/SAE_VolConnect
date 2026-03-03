@@ -48,3 +48,24 @@ class Arriver(db.Model):
     date_heure_arrivee = db.Column(db.DateTime)
     terminal = db.relationship('Terminal', backref=db.backref ('Arriver', lazy="dynamic"))
     vol = db.relationship('Vol', backref=db.backref ('Arriver', lazy="dynamic"))
+
+def get_all_companies():
+    return Companie.query.all()
+
+def get_all_aeroports():
+    return Aeroport.query.all()
+
+def get_all_localiser():
+    return Localiser.query.all()
+
+def get_all_terminaux():
+    return Terminal.query.all()
+
+def get_all_vols():
+    return Vol.query.all()
+
+def get_all_partir():
+    return Partir.query.all()
+
+def get_all_arriver():
+    return Arriver.query.all()
