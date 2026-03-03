@@ -3,7 +3,7 @@
 -- Donner les villes que nous pouvons atteindre par vols directs en partant de Paris
 
 WITH RECURSIVE vol_dispo AS (
-    SELECT
+    SELECT DISTINCT
         v.id_vol,
         v.nom_vol,
 
@@ -12,6 +12,7 @@ WITH RECURSIVE vol_dispo AS (
         v.date_heure_depart,
         0 as niveau
     FROM vol v
+    WHERE ville = 'Paris'
 
     UNION ALL
 
@@ -28,7 +29,12 @@ WITH RECURSIVE vol_dispo AS (
         ON v.id_vol = ac.id_vol
 )
 SELECT *
-FROM vol_dispo;
+FROM vol_dispo
+WHERE niveau in (
+    SELECT DISTINCT niveau
+    FROM vol_dispo
+    where niveau <3
+);
 
 WITH RECURSIVE arbre_categories AS (
     -- Niveau 0 : racine
