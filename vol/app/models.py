@@ -14,3 +14,10 @@ class Localiser(db.Model):
     id_companie = db.Column(db.Integer, db.ForeignKey('Companie.id_companie'),  primary_key=True)
     companie = db.relationship('Companie', backref=db.backref ('Localiser', lazy="dynamic"))
     aeroport = db.relationship('Aeroport', backref=db.backref ('Localiser', lazy="dynamic"))
+
+class Terminal(db.Model):
+    id_terminal = db.Column(db.Integer, primary_key=True)
+    nom_terminal = db.Column(db.String(100))
+    id_aeroport = db.Column(db.ForeignKey('Aeroport.id_aeroport'))
+    aeroport = db.relationship('Aeroport', backref=db.backref ('Terminal', lazy="dynamic"))
+
