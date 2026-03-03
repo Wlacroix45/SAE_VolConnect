@@ -52,20 +52,62 @@ class Arriver(db.Model):
 def get_all_companies():
     return Companie.query.all()
 
+def create_companie(nom_comp):
+    companie = Companie(nom_comp= nom_comp)
+    db.session.add(companie)
+    db.session.commit()
+    return companie
+
 def get_all_aeroports():
     return Aeroport.query.all()
+
+def create_aeroport(nom_aeroport, ville, pays):
+    aeroport = Aeroport(nom_aeroport=nom_aeroport, ville = ville, pays = pays)
+    db.session.add(aeroport)
+    db.session.commit()
+    return aeroport
 
 def get_all_localiser():
     return Localiser.query.all()
 
+def create_localiser(id_aeroport, id_companie):
+    localiser = Localiser(id_aeroport=id_aeroport, id_companie=id_companie)
+    db.session.add(localiser)
+    db.session.commit()
+    return localiser
+
 def get_all_terminaux():
     return Terminal.query.all()
+
+def create_terminal(nom_terminal, id_aeroport):
+    terminal = Terminal(nom_terminal=nom_terminal, id_aeroport=id_aeroport)
+    db.session.add(terminal)
+    db.session.commit()
+    return terminal
 
 def get_all_vols():
     return Vol.query.all()
 
+def create_vol(nom_vol, id_companie):
+    vol = Vol(nom_vol=nom_vol, id_companie=id_companie)
+    db.session.add(vol)
+    db.session.commit()
+    return vol
+
 def get_all_partir():
     return Partir.query.all()
 
+def create_partir(id_terminal, id_vol, date_heure_depart):
+    partir = Partir(id_terminal=id_terminal, id_vol=id_vol, date_heure_depart=date_heure_depart)
+    db.session.add(partir)
+    db.session.commit()
+    return partir
+
 def get_all_arriver():
     return Arriver.query.all()
+
+def create_arriver(id_terminal, id_vol, date_heure_arrivee):
+    arrivee = arrivee(id_terminal=id_terminal, id_vol=id_vol, date_heure_arrivee=date_heure_arrivee)
+    db.session.add(arrivee)
+    db.session.commit()
+    return arrivee
