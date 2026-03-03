@@ -6,7 +6,7 @@ WITH RECURSIVE vol_dispo AS (
     SELECT DISTINCT
         v.id_vol,
         v.nom_vol,
-
+        v.ville,
         v.nom_terminal,
 
         v.date_heure_depart,
@@ -19,7 +19,7 @@ WITH RECURSIVE vol_dispo AS (
     SELECT 
         v.id_vol,
         v.nom_vol,
-
+        v.ville,
         v.nom_terminal,
 
         v.date_heure_depart,
