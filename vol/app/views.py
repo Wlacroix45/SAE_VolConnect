@@ -31,6 +31,10 @@ class CompanieItem(Resource):
         if companie is None:
             abort(404,"Companie not found")
         return companie, 200
+    
+    def delete(self,id):
+        delete_companie(id)
+        return {}, 204
 
 @ns.route("/aeroports")
 class AeroportCollection(Resource):
@@ -60,6 +64,10 @@ class AeroportItem(Resource):
         if aeroport is None:
             abort(404,"Aeroport not found")
         return aeroport, 200 
+    
+    def delete(self,id):
+        delete_aeroport(id)
+        return {}, 204
 
 @ns.route("/localisations")
 class LocaliserCollection(Resource):
@@ -101,7 +109,11 @@ class TerminalItem(Resource):
         terminal = modify_terminal(id,ns.payload["nom_terminal"], ns.payload["id_aeroport"])
         if terminal is None:
             abort(404,"Terminal not found")
-        return terminal, 200  
+        return terminal, 200 
+
+    def delete(self,id):
+        delete_terminal(id)
+        return {}, 204 
 
 @ns.route("/departs")
 class PartirCollection(Resource):
@@ -153,3 +165,7 @@ class VolItem(Resource):
         if vol is None:
             abort(404,"Vol not found")
         return vol, 200  
+    
+    def delete(self,id):
+        delete_vol(id)
+        return {}, 204
