@@ -1,4 +1,5 @@
 from .extensions import db
+from datetime import datetime
 
 class Companie(db.Model):
     __tablename__ = 'Companie'
@@ -98,6 +99,8 @@ def get_all_partir():
     return Partir.query.all()
 
 def create_partir(id_terminal, id_vol, date_heure_depart):
+    if isinstance(date_heure_depart, str):
+        date_heure_depart = datetime.fromisoformat(date_heure_depart)
     partir = Partir(id_terminal=id_terminal, id_vol=id_vol, date_heure_depart=date_heure_depart)
     db.session.add(partir)
     db.session.commit()
@@ -107,7 +110,9 @@ def get_all_arriver():
     return Arriver.query.all()
 
 def create_arriver(id_terminal, id_vol, date_heure_arrivee):
-    arrivee = arrivee(id_terminal=id_terminal, id_vol=id_vol, date_heure_arrivee=date_heure_arrivee)
+    if isinstance(date_heure_arrivee, str):
+        date_heure_arrivee = datetime.fromisoformat(date_heure_arrivee)
+    arrivee = Arriver(id_terminal=id_terminal, id_vol=id_vol, date_heure_arrivee=date_heure_arrivee)
     db.session.add(arrivee)
     db.session.commit()
     return arrivee

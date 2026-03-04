@@ -23,7 +23,7 @@ class AeroportCollection(Resource):
     
     @ns.expect(aeroport_input_model)
     def post(self):
-        create_aeroport(nom_comp=ns.payload["nom_aeroport"], ville=ns.payload["ville"], pays=ns.payload["pays"])
+        create_aeroport(nom_aeroport=ns.payload["nom_aeroport"], ville=ns.payload["ville"], pays=ns.payload["pays"])
         return {}, 201        
 
 @ns.route("/localisations")

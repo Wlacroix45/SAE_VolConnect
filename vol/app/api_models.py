@@ -18,7 +18,7 @@ aeroport_model = api.model("Aeroport",{
 })
 
 aeroport_input_model = api.model("AeroportInput",{
-    "nom_aeroport": fields.Integer,
+    "nom_aeroport": fields.String,
     "ville": fields.String,
     "pays": fields.String
 })
