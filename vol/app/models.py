@@ -116,3 +116,15 @@ def create_arriver(id_terminal, id_vol, date_heure_arrivee):
     db.session.add(arrivee)
     db.session.commit()
     return arrivee
+
+def get_companie(id):
+    return Companie.query.get(id)
+
+def get_aeroport(id):
+    return Aeroport.query.get(id)
+
+def get_terminal(id):
+    return Terminal.query.get(id)
+
+def get_vol(id):
+    return Vol.query.get(id)

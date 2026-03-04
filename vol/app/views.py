@@ -1,4 +1,4 @@
-from flask_restx import Resource, Namespace
+from flask_restx import Resource, Namespace, abort
 from .models import *
 from .api_models import *
 # creation du namespace, racine de tous les endpoints
@@ -15,6 +15,16 @@ class CompanieCollection(Resource):
         create_companie(nom_comp=ns.payload["nom_comp"])
         return {}, 201
 
+@ns.route("/companies/<int:id>")
+@ns.response(404, 'Companie not found')
+class CompanieItem(Resource):
+    @ns.marshal_with(companie_model)
+    def get(self,id):
+        companie = get_companie(id)
+        if companie is None:
+            abort(404,"Companie not found")
+        return companie
+
 @ns.route("/aeroports")
 class AeroportCollection(Resource):
     @ns.marshal_list_with(aeroport_model)
@@ -24,7 +34,17 @@ class AeroportCollection(Resource):
     @ns.expect(aeroport_input_model)
     def post(self):
         create_aeroport(nom_aeroport=ns.payload["nom_aeroport"], ville=ns.payload["ville"], pays=ns.payload["pays"])
-        return {}, 201        
+        return {}, 201
+
+@ns.route("/aeroports/<int:id>")
+@ns.response(404, 'Aeroport not found')
+class AeroportItem(Resource):
+    @ns.marshal_with(aeroport_model)
+    def get(self,id):
+        aeroport = get_aeroport(id)
+        if aeroport is None:
+            abort(404,"Aeroport not found")
+        return aeroport        
 
 @ns.route("/localisations")
 class LocaliserCollection(Resource):
@@ -47,6 +67,16 @@ class TerminalCollection(Resource):
     def post(self):
         create_terminal(nom_terminal=ns.payload["nom_terminal"], id_aeroport=ns.payload["id_aeroport"])
         return {}, 201
+
+@ns.route("/terminaux/<int:id>")
+@ns.response(404, 'Terminal not found')
+class TerminalItem(Resource):
+    @ns.marshal_with(terminal_model)
+    def get(self,id):
+        terminal = get_terminal(id)
+        if terminal is None:
+            abort(404,"Terminal not found")
+        return terminal   
 
 @ns.route("/departs")
 class PartirCollection(Resource):
@@ -80,3 +110,13 @@ class VolCollection(Resource):
     def post(self):
         create_vol(nom_vol=ns.payload["nom_vol"], id_companie=ns.payload["id_companie"])
         return {}, 201
+
+@ns.route("/vols/<int:id>")
+@ns.response(404, 'Vol not found')
+class VolItem(Resource):
+    @ns.marshal_with(vol_model)
+    def get(self,id):
+        vol = get_vol(id)
+        if vol is None:
+            abort(404,"Vol not found")
+        return vol   
