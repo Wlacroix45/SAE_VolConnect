@@ -1,7 +1,6 @@
 from flask_restx import Resource, Namespace, abort
 from .models import *
 from .api_models import *
-# creation du namespace, racine de tous les endpoints
 ns = Namespace("api")
 
 @ns.route("/companies")
@@ -24,6 +23,14 @@ class CompanieItem(Resource):
         if companie is None:
             abort(404,"Companie not found")
         return companie
+    
+    @ns.expect(companie_input_model)
+    @ns.marshal_with(companie_model)
+    def put(self,id):
+        companie = modify_companie(id,ns.payload["nom_comp"])
+        if companie is None:
+            abort(404,"Companie not found")
+        return companie, 200
 
 @ns.route("/aeroports")
 class AeroportCollection(Resource):
@@ -44,7 +51,15 @@ class AeroportItem(Resource):
         aeroport = get_aeroport(id)
         if aeroport is None:
             abort(404,"Aeroport not found")
-        return aeroport        
+        return aeroport       
+
+    @ns.expect(aeroport_input_model)
+    @ns.marshal_with(aeroport_model)
+    def put(self,id):
+        aeroport = modify_aeroport(id,ns.payload["nom_aeroport"], ns.payload["ville"], ns.payload["pays"])
+        if aeroport is None:
+            abort(404,"Aeroport not found")
+        return aeroport, 200 
 
 @ns.route("/localisations")
 class LocaliserCollection(Resource):
@@ -67,6 +82,8 @@ class TerminalCollection(Resource):
     def post(self):
         create_terminal(nom_terminal=ns.payload["nom_terminal"], id_aeroport=ns.payload["id_aeroport"])
         return {}, 201
+    
+    
 
 @ns.route("/terminaux/<int:id>")
 @ns.response(404, 'Terminal not found')
@@ -76,7 +93,15 @@ class TerminalItem(Resource):
         terminal = get_terminal(id)
         if terminal is None:
             abort(404,"Terminal not found")
-        return terminal   
+        return terminal  
+
+    @ns.expect(terminal_input_model)
+    @ns.marshal_with(terminal_model)
+    def put(self,id):
+        terminal = modify_terminal(id,ns.payload["nom_terminal"], ns.payload["id_aeroport"])
+        if terminal is None:
+            abort(404,"Terminal not found")
+        return terminal, 200  
 
 @ns.route("/departs")
 class PartirCollection(Resource):
@@ -120,3 +145,11 @@ class VolItem(Resource):
         if vol is None:
             abort(404,"Vol not found")
         return vol   
+    
+    @ns.expect(vol_input_model)
+    @ns.marshal_with(vol_model)
+    def put(self,id):
+        vol = modify_vol(id,ns.payload["nom_vol"], ns.payload["id_companie"])
+        if vol is None:
+            abort(404,"Vol not found")
+        return vol, 200  

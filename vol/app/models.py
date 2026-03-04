@@ -59,12 +59,30 @@ def create_companie(nom_comp):
     db.session.commit()
     return companie
 
+def modify_companie(id,nom_comp):
+    companie = Companie.query.get(id)
+    if companie is None:
+        return None
+    companie.nom_comp = nom_comp
+    db.session.commit()
+    return companie
+
 def get_all_aeroports():
     return Aeroport.query.all()
 
 def create_aeroport(nom_aeroport, ville, pays):
     aeroport = Aeroport(nom_aeroport=nom_aeroport, ville = ville, pays = pays)
     db.session.add(aeroport)
+    db.session.commit()
+    return aeroport
+
+def modify_aeroport(id, nom_aeroport, ville, pays):
+    aeroport = Aeroport.query.get(id)
+    if aeroport is None:
+        return None
+    aeroport.nom_aeroport = nom_aeroport
+    aeroport.ville = ville
+    aeroport.pays = pays
     db.session.commit()
     return aeroport
 
@@ -86,6 +104,15 @@ def create_terminal(nom_terminal, id_aeroport):
     db.session.commit()
     return terminal
 
+def modify_terminal(id, nom_terminal, id_aeroport):
+    terminal = Terminal.query.get(id)
+    if terminal is None:
+        return None
+    terminal.nom_terminal = nom_terminal
+    terminal.id_aeroport = id_aeroport
+    db.session.commit()
+    return terminal
+
 def get_all_vols():
     return Vol.query.all()
 
@@ -94,6 +121,16 @@ def create_vol(nom_vol, id_companie):
     db.session.add(vol)
     db.session.commit()
     return vol
+
+def modify_vol(id, nom_vol, id_companie):
+    vol = Vol.query.get(id)
+    if vol is None:
+        return None
+    vol.nom_vol = nom_vol
+    vol.id_companie = id_companie
+    db.session.commit()
+    return vol
+
 
 def get_all_partir():
     return Partir.query.all()
