@@ -8,7 +8,7 @@ companie_model = api.model("Companie",{
 })
 
 companie_input_model = api.model("CompanieInput",{
-    "nom_comp": fields.String
+    "nom_comp": fields.String(required=True)
 })
 
 aeroport_model = api.model("Aeroport",{
@@ -20,9 +20,9 @@ aeroport_model = api.model("Aeroport",{
 })
 
 aeroport_input_model = api.model("AeroportInput",{
-    "nom_aeroport": fields.String,
-    "ville": fields.String,
-    "pays": fields.String
+    "nom_aeroport": fields.String(required=True),
+    "ville": fields.String(required=True),
+    "pays": fields.String(required=True)
 })
 
 localiser_model = api.model("Localiser",{
@@ -31,8 +31,8 @@ localiser_model = api.model("Localiser",{
 })
 
 localiser_input_model = api.model("LocaliserInput",{
-    "id_aeroport": fields.Integer,
-    "id_companie": fields.Integer
+    "id_aeroport": fields.Integer(required=True),
+    "id_companie": fields.Integer(required=True)
 })
 
 
@@ -44,8 +44,8 @@ terminal_model = api.model("Terminal",{
 })
 
 terminal_input_model = api.model("TerminalInput",{
-    "nom_terminal": fields.String,
-    "id_aeroport": fields.Integer
+    "nom_terminal": fields.String(required=True),
+    "id_aeroport": fields.Integer(required=True)
 })
 
 partir_model = api.model("Partir",{
@@ -55,9 +55,9 @@ partir_model = api.model("Partir",{
 })
 
 partir_input_model = api.model("PartirInput",{
-    "id_terminal": fields.Integer,
-    "id_vol": fields.Integer,
-    "date_heure_depart": fields.DateTime
+    "id_terminal": fields.Integer(required=True),
+    "id_vol": fields.Integer(required=True),
+    "date_heure_depart": fields.DateTime(required=True)
 })
 
 arriver_model = api.model("Arriver",{
@@ -67,9 +67,9 @@ arriver_model = api.model("Arriver",{
 })
 
 arriver_input_model = api.model("ArriverPut",{
-    "id_terminal": fields.Integer,
-    "id_vol": fields.Integer,
-    "date_heure_arrivee": fields.DateTime
+    "id_terminal": fields.Integer(required=True),
+    "id_vol": fields.Integer(required=True),
+    "date_heure_arrivee": fields.DateTime(required=True)
 })
 
 vol_model = api.model("Vol",{
@@ -80,6 +80,6 @@ vol_model = api.model("Vol",{
 })
 
 vol_input_model = api.model("Vol",{
-    "nom_vol": fields.String,
-    "id_companie": fields.Integer
+    "nom_vol": fields.String(required=True),
+    "id_companie": fields.Integer(required=True)
 })
