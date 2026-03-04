@@ -3,7 +3,8 @@ from .extensions import api
 
 companie_model = api.model("Companie",{
 "id_companie": fields.Integer,
-"nom_comp":fields.String
+"nom_comp":fields.String,
+"uri":fields.Url('api_companie_item', absolute=True, url_key='id_companie')
 })
 
 companie_input_model = api.model("CompanieInput",{
@@ -14,7 +15,8 @@ aeroport_model = api.model("Aeroport",{
     "id_aeroport": fields.Integer,
     "nom_aeroport": fields.String,
     "ville": fields.String,
-    "pays": fields.String
+    "pays": fields.String,
+    "uri":fields.Url('api_aeroport_item', absolute=True, url_key='id_aeroport')
 })
 
 aeroport_input_model = api.model("AeroportInput",{
@@ -37,7 +39,8 @@ localiser_input_model = api.model("LocaliserInput",{
 terminal_model = api.model("Terminal",{
     "id_terminal": fields.Integer,
     "nom_terminal": fields.String,
-    "id_aeroport": fields.Integer
+    "id_aeroport": fields.Integer,
+    "uri":fields.Url('api_terminal_item', absolute=True, url_key='id_terminal')
 })
 
 terminal_input_model = api.model("TerminalInput",{
@@ -72,7 +75,8 @@ arriver_input_model = api.model("ArriverPut",{
 vol_model = api.model("Vol",{
     "id_vol": fields.Integer,
     "nom_vol": fields.String,
-    "id_companie": fields.Integer
+    "id_companie": fields.Integer,
+    "uri":fields.Url('api_vol_item', absolute=True, url_key='id_vol')
 })
 
 vol_input_model = api.model("Vol",{

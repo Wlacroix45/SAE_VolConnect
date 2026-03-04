@@ -14,26 +14,26 @@ class CompanieCollection(Resource):
         create_companie(nom_comp=ns.payload["nom_comp"])
         return {}, 201
 
-@ns.route("/companies/<int:id>")
+@ns.route("/companies/<int:id_companie>")
 @ns.response(404, 'Companie not found')
 class CompanieItem(Resource):
     @ns.marshal_with(companie_model)
-    def get(self,id):
-        companie = get_companie(id)
+    def get(self,id_companie):
+        companie = get_companie(id_companie)
         if companie is None:
             abort(404,"Companie not found")
         return companie
     
     @ns.expect(companie_input_model)
     @ns.marshal_with(companie_model)
-    def put(self,id):
-        companie = modify_companie(id,ns.payload["nom_comp"])
+    def put(self,id_companie):
+        companie = modify_companie(id_companie,ns.payload["nom_comp"])
         if companie is None:
             abort(404,"Companie not found")
         return companie, 200
     
-    def delete(self,id):
-        delete_companie(id)
+    def delete(self,id_companie):
+        delete_companie(id_companie)
         return {}, 204
 
 @ns.route("/aeroports")
@@ -47,26 +47,26 @@ class AeroportCollection(Resource):
         create_aeroport(nom_aeroport=ns.payload["nom_aeroport"], ville=ns.payload["ville"], pays=ns.payload["pays"])
         return {}, 201
 
-@ns.route("/aeroports/<int:id>")
+@ns.route("/aeroports/<int:id_aeroport>")
 @ns.response(404, 'Aeroport not found')
 class AeroportItem(Resource):
     @ns.marshal_with(aeroport_model)
-    def get(self,id):
-        aeroport = get_aeroport(id)
+    def get(self,id_aeroport):
+        aeroport = get_aeroport(id_aeroport)
         if aeroport is None:
             abort(404,"Aeroport not found")
         return aeroport       
 
     @ns.expect(aeroport_input_model)
     @ns.marshal_with(aeroport_model)
-    def put(self,id):
-        aeroport = modify_aeroport(id,ns.payload["nom_aeroport"], ns.payload["ville"], ns.payload["pays"])
+    def put(self,id_aeroport):
+        aeroport = modify_aeroport(id_aeroport,ns.payload["nom_aeroport"], ns.payload["ville"], ns.payload["pays"])
         if aeroport is None:
             abort(404,"Aeroport not found")
         return aeroport, 200 
     
-    def delete(self,id):
-        delete_aeroport(id)
+    def delete(self,id_aeroport):
+        delete_aeroport(id_aeroport)
         return {}, 204
 
 @ns.route("/localisations")
@@ -93,26 +93,26 @@ class TerminalCollection(Resource):
     
     
 
-@ns.route("/terminaux/<int:id>")
+@ns.route("/terminaux/<int:id_terminal>")
 @ns.response(404, 'Terminal not found')
 class TerminalItem(Resource):
     @ns.marshal_with(terminal_model)
-    def get(self,id):
-        terminal = get_terminal(id)
+    def get(self,id_terminal):
+        terminal = get_terminal(id_terminal)
         if terminal is None:
             abort(404,"Terminal not found")
         return terminal  
 
     @ns.expect(terminal_input_model)
     @ns.marshal_with(terminal_model)
-    def put(self,id):
-        terminal = modify_terminal(id,ns.payload["nom_terminal"], ns.payload["id_aeroport"])
+    def put(self,id_terminal):
+        terminal = modify_terminal(id_terminal,ns.payload["nom_terminal"], ns.payload["id_aeroport"])
         if terminal is None:
             abort(404,"Terminal not found")
         return terminal, 200 
 
-    def delete(self,id):
-        delete_terminal(id)
+    def delete(self,id_terminal):
+        delete_terminal(id_terminal)
         return {}, 204 
 
 @ns.route("/departs")
@@ -148,24 +148,24 @@ class VolCollection(Resource):
         create_vol(nom_vol=ns.payload["nom_vol"], id_companie=ns.payload["id_companie"])
         return {}, 201
 
-@ns.route("/vols/<int:id>")
+@ns.route("/vols/<int:id_vol>")
 @ns.response(404, 'Vol not found')
 class VolItem(Resource):
     @ns.marshal_with(vol_model)
-    def get(self,id):
-        vol = get_vol(id)
+    def get(self,id_vol):
+        vol = get_vol(id_vol)
         if vol is None:
             abort(404,"Vol not found")
         return vol   
     
     @ns.expect(vol_input_model)
     @ns.marshal_with(vol_model)
-    def put(self,id):
-        vol = modify_vol(id,ns.payload["nom_vol"], ns.payload["id_companie"])
+    def put(self,id_vol):
+        vol = modify_vol(id_vol,ns.payload["nom_vol"], ns.payload["id_companie"])
         if vol is None:
             abort(404,"Vol not found")
         return vol, 200  
     
-    def delete(self,id):
-        delete_vol(id)
+    def delete(self,id_vol):
+        delete_vol(id_vol)
         return {}, 204
