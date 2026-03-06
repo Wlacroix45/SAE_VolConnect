@@ -1,9 +1,9 @@
 from .extensions import db
 from datetime import datetime
 
-class Companie(db.Model):
-    __tablename__ = 'Companie'
-    id_companie = db.Column(db.Integer, primary_key=True)
+class Compagnie(db.Model):
+    __tablename__ = 'Compagnie'
+    id_compagnie = db.Column(db.Integer, primary_key=True)
     nom_comp = db.Column(db.String(100))
 
 class Aeroport(db.Model):
@@ -16,8 +16,8 @@ class Aeroport(db.Model):
 class Localiser(db.Model):
     __tablename__ = 'Localiser'
     id_aeroport = db.Column(db.Integer, db.ForeignKey('Aeroport.id_aeroport'), primary_key=True)
-    id_companie = db.Column(db.Integer, db.ForeignKey('Companie.id_companie'),  primary_key=True)
-    companie = db.relationship('Companie', backref=db.backref('Localiser', lazy="dynamic", cascade="all, delete-orphan"))
+    id_compagnie = db.Column(db.Integer, db.ForeignKey('Compagnie.id_compagnie'),  primary_key=True)
+    compagnie = db.relationship('Compagnie', backref=db.backref('Localiser', lazy="dynamic", cascade="all, delete-orphan"))
     aeroport = db.relationship('Aeroport', backref=db.backref('Localiser', lazy="dynamic", cascade="all, delete-orphan"))
 
 class Terminal(db.Model):
@@ -31,8 +31,8 @@ class Vol(db.Model):
     __tablename__ = 'Vol'
     id_vol = db.Column(db.Integer, primary_key=True)
     nom_vol = db.Column(db.String(100))
-    id_companie = db.Column(db.Integer, db.ForeignKey('Companie.id_companie'))
-    companie = db.relationship('Companie', backref=db.backref('Vol', lazy="dynamic", cascade="all, delete-orphan"))
+    id_compagnie = db.Column(db.Integer, db.ForeignKey('Compagnie.id_compagnie'))
+    compagnie = db.relationship('Compagnie', backref=db.backref('Vol', lazy="dynamic", cascade="all, delete-orphan"))
 
 class Partir(db.Model):
     __tablename__ = 'Partir'
@@ -50,22 +50,22 @@ class Arriver(db.Model):
     terminal = db.relationship('Terminal', backref=db.backref('Arriver', lazy="dynamic", cascade="all, delete-orphan"))
     vol = db.relationship('Vol', backref=db.backref('Arriver', lazy="dynamic", cascade="all, delete-orphan"))
 
-def get_all_companies():
-    return Companie.query.all()
+def get_all_compagnies():
+    return Compagnie.query.all()
 
-def create_companie(nom_comp):
-    companie = Companie(nom_comp= nom_comp)
-    db.session.add(companie)
+def create_compagnie(nom_comp):
+    compagnie = Compagnie(nom_comp= nom_comp)
+    db.session.add(compagnie)
     db.session.commit()
-    return companie
+    return compagnie
 
-def modify_companie(id,nom_comp):
-    companie = Companie.query.get(id)
-    if companie is None:
+def modify_compagnie(id,nom_comp):
+    compagnie = Compagnie.query.get(id)
+    if compagnie is None:
         return None
-    companie.nom_comp = nom_comp
+    compagnie.nom_comp = nom_comp
     db.session.commit()
-    return companie
+    return compagnie
 
 def get_all_aeroports():
     return Aeroport.query.all()
@@ -89,8 +89,8 @@ def modify_aeroport(id, nom_aeroport, ville, pays):
 def get_all_localiser():
     return Localiser.query.all()
 
-def create_localiser(id_aeroport, id_companie):
-    localiser = Localiser(id_aeroport=id_aeroport, id_companie=id_companie)
+def create_localiser(id_aeroport, id_compagnie):
+    localiser = Localiser(id_aeroport=id_aeroport, id_compagnie=id_compagnie)
     db.session.add(localiser)
     db.session.commit()
     return localiser
@@ -116,18 +116,18 @@ def modify_terminal(id, nom_terminal, id_aeroport):
 def get_all_vols():
     return Vol.query.all()
 
-def create_vol(nom_vol, id_companie):
-    vol = Vol(nom_vol=nom_vol, id_companie=id_companie)
+def create_vol(nom_vol, id_compagnie):
+    vol = Vol(nom_vol=nom_vol, id_compagnie=id_compagnie)
     db.session.add(vol)
     db.session.commit()
     return vol
 
-def modify_vol(id, nom_vol, id_companie):
+def modify_vol(id, nom_vol, id_compagnie):
     vol = Vol.query.get(id)
     if vol is None:
         return None
     vol.nom_vol = nom_vol
-    vol.id_companie = id_companie
+    vol.id_compagnie = id_compagnie
     db.session.commit()
     return vol
 
@@ -154,8 +154,8 @@ def create_arriver(id_terminal, id_vol, date_heure_arrivee):
     db.session.commit()
     return arrivee
 
-def get_companie(id):
-    return Companie.query.get(id)
+def get_compagnie(id):
+    return Compagnie.query.get(id)
 
 def get_aeroport(id):
     return Aeroport.query.get(id)
@@ -166,10 +166,10 @@ def get_terminal(id):
 def get_vol(id):
     return Vol.query.get(id)
 
-def delete_companie(id):
-    companie = Companie.query.get(id)
-    if companie:
-        db.session.delete(companie)
+def delete_compagnie(id):
+    compagnie = Compagnie.query.get(id)
+    if compagnie:
+        db.session.delete(compagnie)
         db.session.commit()
 
 def delete_aeroport(id):
@@ -189,3 +189,6 @@ def delete_vol(id):
     if vol:
         db.session.delete(vol)
         db.session.commit()
+
+def get_vols_by_compagnie(id_compagnie):
+    return Vol.query.filter_by(id_compagnie=id_compagnie).all()

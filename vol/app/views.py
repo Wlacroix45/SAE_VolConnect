@@ -3,38 +3,48 @@ from .models import *
 from .api_models import *
 ns = Namespace("api")
 
-@ns.route("/companies")
-class CompanieCollection(Resource):
-    @ns.marshal_list_with(companie_model)
+@ns.route("/compagnies")
+class CompagnieCollection(Resource):
+    @ns.marshal_list_with(compagnie_model)
     def get(self):
-        return get_all_companies()
+        return get_all_compagnies()
     
-    @ns.expect(companie_input_model)
+    @ns.expect(compagnie_input_model)
     def post(self):
-        create_companie(nom_comp=ns.payload["nom_comp"])
+        create_compagnie(nom_comp=ns.payload["nom_comp"])
         return {}, 201
 
-@ns.route("/companies/<int:id_companie>")
-@ns.response(404, 'Companie not found')
-class CompanieItem(Resource):
-    @ns.marshal_with(companie_model)
-    def get(self,id_companie):
-        companie = get_companie(id_companie)
-        if companie is None:
-            abort(404,"Companie not found")
-        return companie
+@ns.route("/compagnies/<int:id_compagnie>")
+@ns.response(404, 'Compagnie not found')
+class CompagnieItem(Resource):
+    @ns.marshal_with(compagnie_model)
+    def get(self,id_compagnie):
+        compagnie = get_compagnie(id_compagnie)
+        if compagnie is None:
+            abort(404,"Compagnie not found")
+        return compagnie
     
-    @ns.expect(companie_input_model)
-    @ns.marshal_with(companie_model)
-    def put(self,id_companie):
-        companie = modify_companie(id_companie,ns.payload["nom_comp"])
-        if companie is None:
-            abort(404,"Companie not found")
-        return companie, 200
+    @ns.expect(compagnie_input_model)
+    @ns.marshal_with(compagnie_model)
+    def put(self,id_compagnie):
+        compagnie = modify_compagnie(id_compagnie,ns.payload["nom_comp"])
+        if compagnie is None:
+            abort(404,"Compagnie not found")
+        return compagnie, 200
     
-    def delete(self,id_companie):
-        delete_companie(id_companie)
+    def delete(self,id_compagnie):
+        delete_compagnie(id_compagnie)
         return {}, 204
+
+@ns.route("/compagnies/<int:id_compagnie>/vols")
+@ns.response(404, 'Vol not found')
+class CompagnieVolsCollection(Resource):
+    @ns.marshal_list_with(vol_model)
+    def get(self,id_compagnie):
+        vols = get_vols_by_compagnie(id_compagnie)
+        if vols is None:
+            abort(404,"Vol not found")
+        return vols
 
 @ns.route("/aeroports")
 class AeroportCollection(Resource):

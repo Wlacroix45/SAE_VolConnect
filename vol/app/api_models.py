@@ -1,13 +1,13 @@
 from flask_restx import fields
 from .extensions import api
 
-companie_model = api.model("Companie",{
-"id_companie": fields.Integer,
+compagnie_model = api.model("Compagnie",{
+"id_compagnie": fields.Integer,
 "nom_comp":fields.String,
-"uri":fields.Url('api_companie_item', absolute=True, url_key='id_companie')
+"uri":fields.Url('api_compagnie_item', absolute=True, url_key='id_compagnie')
 })
 
-companie_input_model = api.model("CompanieInput",{
+compagnie_input_model = api.model("CompagnieInput",{
     "nom_comp": fields.String(required=True)
 })
 
@@ -27,12 +27,12 @@ aeroport_input_model = api.model("AeroportInput",{
 
 localiser_model = api.model("Localiser",{
     "id_aeroport": fields.Integer,
-    "id_companie": fields.Integer
+    "id_compagnie": fields.Integer
 })
 
 localiser_input_model = api.model("LocaliserInput",{
     "id_aeroport": fields.Integer(required=True),
-    "id_companie": fields.Integer(required=True)
+    "id_compagnie": fields.Integer(required=True)
 })
 
 
@@ -75,11 +75,11 @@ arriver_input_model = api.model("ArriverPut",{
 vol_model = api.model("Vol",{
     "id_vol": fields.Integer,
     "nom_vol": fields.String,
-    "id_companie": fields.Integer,
+    "id_compagnie": fields.Integer,
     "uri":fields.Url('api_vol_item', absolute=True, url_key='id_vol')
 })
 
 vol_input_model = api.model("Vol",{
     "nom_vol": fields.String(required=True),
-    "id_companie": fields.Integer(required=True)
+    "id_compagnie": fields.Integer(required=True)
 })
