@@ -208,3 +208,16 @@ def get_departs_by_terminal(id_terminal):
             "date_heure_depart": depart.date_heure_depart
         })
     return result
+
+def get_arrivees_by_terminal(id_terminal):
+    arrivees = Arriver.query.filter_by(id_terminal=id_terminal).all()
+    result = []
+    for arrivee in arrivees:
+        vol = Vol.query.get(arrivee.id_vol)
+        result.append({
+            "id_vol": vol.id_vol,
+            "nom_vol": vol.nom_vol,
+            "id_compagnie": vol.id_compagnie,
+            "date_heure_arrivee": arrivee.date_heure_arrivee
+        })
+    return result

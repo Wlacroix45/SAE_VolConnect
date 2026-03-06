@@ -143,6 +143,16 @@ class TerminalDepartsCollection(Resource):
             abort(404,"Vol not found")
         return vols
 
+@ns.route("/terminaux/<int:id_terminal>/arrivees")
+@ns.response(404, 'Vol not found')
+class TerminalArriveesCollection(Resource):
+    @ns.marshal_list_with(vol_arrivee_model)
+    def get(self,id_terminal):
+        vols = get_arrivees_by_terminal(id_terminal)
+        if vols is None:
+            abort(404,"Vol not found")
+        return vols
+
 @ns.route("/departs")
 class PartirCollection(Resource):
     @ns.marshal_list_with(partir_model)
