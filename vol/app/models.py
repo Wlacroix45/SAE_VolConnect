@@ -192,3 +192,6 @@ def delete_vol(id):
 
 def get_vols_by_compagnie(id_compagnie):
     return Vol.query.filter_by(id_compagnie=id_compagnie).all()
+
+def get_terminaux_by_aeroport(id_aeroport):
+    return Terminal.query.filter_by(id_aeroport=id_aeroport).all()

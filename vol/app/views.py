@@ -79,6 +79,16 @@ class AeroportItem(Resource):
         delete_aeroport(id_aeroport)
         return {}, 204
 
+@ns.route("/aeroports/<int:id_aeroport>/terminaux")
+@ns.response(404, 'Terminal not found')
+class AeroportTerminalCollection(Resource):
+    @ns.marshal_list_with(terminal_model)
+    def get(self,id_aeroport):
+        terminaux = get_terminaux_by_aeroport(id_aeroport)
+        if terminaux is None:
+            abort(404,"Terminal not found")
+        return terminaux
+
 @ns.route("/localisations")
 class LocaliserCollection(Resource):
     @ns.marshal_list_with(localiser_model)
@@ -87,7 +97,7 @@ class LocaliserCollection(Resource):
     
     @ns.expect(localiser_input_model)
     def post(self):
-        create_localiser(id_aeroport=ns.payload["id_aeroport"], id_companie=ns.payload["id_companie"])
+        create_localiser(id_aeroport=ns.payload["id_aeroport"], id_compagnie=ns.payload["id_compagnie"])
         return {}, 201
     
 @ns.route("/terminaux")
@@ -155,7 +165,7 @@ class VolCollection(Resource):
     
     @ns.expect(vol_input_model)
     def post(self):
-        create_vol(nom_vol=ns.payload["nom_vol"], id_companie=ns.payload["id_companie"])
+        create_vol(nom_vol=ns.payload["nom_vol"], id_compagnie=ns.payload["id_compagnie"])
         return {}, 201
 
 @ns.route("/vols/<int:id_vol>")
@@ -171,7 +181,7 @@ class VolItem(Resource):
     @ns.expect(vol_input_model)
     @ns.marshal_with(vol_model)
     def put(self,id_vol):
-        vol = modify_vol(id_vol,ns.payload["nom_vol"], ns.payload["id_companie"])
+        vol = modify_vol(id_vol,ns.payload["nom_vol"], ns.payload["id_compagnie"])
         if vol is None:
             abort(404,"Vol not found")
         return vol, 200  
