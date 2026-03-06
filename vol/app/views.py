@@ -81,7 +81,7 @@ class AeroportItem(Resource):
 
 @ns.route("/aeroports/<int:id_aeroport>/terminaux")
 @ns.response(404, 'Terminal not found')
-class AeroportTerminalCollection(Resource):
+class AeroportTerminalsCollection(Resource):
     @ns.marshal_list_with(terminal_model)
     def get(self,id_aeroport):
         terminaux = get_terminaux_by_aeroport(id_aeroport)
@@ -111,8 +111,6 @@ class TerminalCollection(Resource):
         create_terminal(nom_terminal=ns.payload["nom_terminal"], id_aeroport=ns.payload["id_aeroport"])
         return {}, 201
     
-    
-
 @ns.route("/terminaux/<int:id_terminal>")
 @ns.response(404, 'Terminal not found')
 class TerminalItem(Resource):
@@ -134,6 +132,16 @@ class TerminalItem(Resource):
     def delete(self,id_terminal):
         delete_terminal(id_terminal)
         return {}, 204 
+
+@ns.route("/terminaux/<int:id_terminal>/departs")
+@ns.response(404, 'Vol not found')
+class TerminalDepartsCollection(Resource):
+    @ns.marshal_list_with(vol_depart_model)
+    def get(self,id_terminal):
+        vols = get_departs_by_terminal(id_terminal)
+        if vols is None:
+            abort(404,"Vol not found")
+        return vols
 
 @ns.route("/departs")
 class PartirCollection(Resource):

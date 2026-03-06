@@ -79,6 +79,20 @@ vol_model = api.model("Vol",{
     "uri":fields.Url('api_vol_item', absolute=True, url_key='id_vol')
 })
 
+vol_depart_model = api.model("VolDepart",{
+    "id_vol": fields.Integer,
+    "nom_vol": fields.String,
+    "id_compagnie": fields.Integer,
+    "date_heure_depart": fields.DateTime
+})
+
+vol_arrivee_model = api.model("VolArrivee",{
+    "id_vol": fields.Integer,
+    "nom_vol": fields.String,
+    "id_compagnie": fields.Integer,
+    "date_heure_arrivee": fields.DateTime
+})
+
 vol_input_model = api.model("Vol",{
     "nom_vol": fields.String(required=True),
     "id_compagnie": fields.Integer(required=True)

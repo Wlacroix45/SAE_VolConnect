@@ -195,3 +195,16 @@ def get_vols_by_compagnie(id_compagnie):
 
 def get_terminaux_by_aeroport(id_aeroport):
     return Terminal.query.filter_by(id_aeroport=id_aeroport).all()
+
+def get_departs_by_terminal(id_terminal):
+    departs = Partir.query.filter_by(id_terminal=id_terminal).all()
+    result = []
+    for depart in departs:
+        vol = Vol.query.get(depart.id_vol)
+        result.append({
+            "id_vol": vol.id_vol,
+            "nom_vol": vol.nom_vol,
+            "id_compagnie": vol.id_compagnie,
+            "date_heure_depart": depart.date_heure_depart
+        })
+    return result
