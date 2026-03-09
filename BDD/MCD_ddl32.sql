@@ -1,21 +1,23 @@
-DROP TABLE IF EXISTS vol;
+DROP TABLE vol;
+DROP TYPE employe_tab;
+DROP TYPE employe;
 
-create or replace type employe as object (
-  nom varchar2(20), 
-  poste varchar2(20)
+CREATE OR REPLACE TYPE employe AS OBJECT (
+  nom VARCHAR2(20),
+  poste VARCHAR2(20)
 );
-
+/
+CREATE OR REPLACE TYPE employe_tab AS TABLE OF employe;
+/
 CREATE TABLE vol (
-  PRIMARY KEY (id_vol),
-  id_vol             VARCHAR(42) NOT NULL,
-  nom_vol            VARCHAR(42),
-  date_heure_depart  VARCHAR(42),
-  date_heure_arrivee VARCHAR(42),
-  nom_comp           VARCHAR(42),
-  nom_terminal       VARCHAR(42),
-  ville              VARCHAR(42),
-  pays               VARCHAR(42),
-  equipage           employe
-  storage table for NT
-nested table employe store as employe_nt;
-);
+  id_vol             VARCHAR2(42) NOT NULL,
+  nom_vol            VARCHAR2(42),
+  date_heure_depart  VARCHAR2(42),
+  date_heure_arrivee VARCHAR2(42),
+  nom_comp           VARCHAR2(42),
+  nom_terminal       VARCHAR2(42),
+  ville              VARCHAR2(42),
+  pays               VARCHAR2(42),
+  equipage           employe_tab,
+  PRIMARY KEY (id_vol)
+) NESTED TABLE equipage STORE AS equipage_nt;
