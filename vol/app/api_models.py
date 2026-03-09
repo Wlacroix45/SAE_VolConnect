@@ -48,34 +48,14 @@ terminal_input_model = api.model("TerminalInput",{
     "id_aeroport": fields.Integer(required=True)
 })
 
-partir_model = api.model("Partir",{
-    "id_terminal": fields.Integer,
-    "id_vol": fields.Integer,
-    "date_heure_depart": fields.DateTime
-})
-
-partir_input_model = api.model("PartirInput",{
-    "id_terminal": fields.Integer(required=True),
-    "id_vol": fields.Integer(required=True),
-    "date_heure_depart": fields.DateTime(required=True)
-})
-
-arriver_model = api.model("Arriver",{
-    "id_terminal": fields.Integer,
-    "id_vol": fields.Integer,
-    "date_heure_arrivee": fields.DateTime
-})
-
-arriver_input_model = api.model("ArriverPut",{
-    "id_terminal": fields.Integer(required=True),
-    "id_vol": fields.Integer(required=True),
-    "date_heure_arrivee": fields.DateTime(required=True)
-})
-
 vol_model = api.model("Vol",{
     "id_vol": fields.Integer,
     "nom_vol": fields.String,
     "id_compagnie": fields.Integer,
+    "id_terminal_depart": fields.Integer,
+    "id_terminal_arrivee": fields.Integer,
+    "date_heure_depart": fields.DateTime,
+    "date_heure_arrivee": fields.DateTime,
     "uri":fields.Url('api_vol_item', absolute=True, url_key='id_vol')
 })
 
@@ -95,5 +75,9 @@ vol_arrivee_model = api.model("VolArrivee",{
 
 vol_input_model = api.model("Vol",{
     "nom_vol": fields.String(required=True),
-    "id_compagnie": fields.Integer(required=True)
+    "id_compagnie": fields.Integer(required=True),
+    "id_terminal_depart": fields.Integer(required=True),
+    "id_terminal_arrivee": fields.Integer(required=True),
+    "date_heure_depart": fields.DateTime(required=True),
+    "date_heure_arrivee": fields.DateTime(required=True)
 })

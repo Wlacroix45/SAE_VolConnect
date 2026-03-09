@@ -133,48 +133,6 @@ class TerminalItem(Resource):
         delete_terminal(id_terminal)
         return {}, 204 
 
-@ns.route("/terminaux/<int:id_terminal>/departs")
-@ns.response(404, 'Vol not found')
-class TerminalDepartsCollection(Resource):
-    @ns.marshal_list_with(vol_depart_model)
-    def get(self,id_terminal):
-        vols = get_departs_by_terminal(id_terminal)
-        if vols is None:
-            abort(404,"Vol not found")
-        return vols
-
-@ns.route("/terminaux/<int:id_terminal>/arrivees")
-@ns.response(404, 'Vol not found')
-class TerminalArriveesCollection(Resource):
-    @ns.marshal_list_with(vol_arrivee_model)
-    def get(self,id_terminal):
-        vols = get_arrivees_by_terminal(id_terminal)
-        if vols is None:
-            abort(404,"Vol not found")
-        return vols
-
-@ns.route("/departs")
-class PartirCollection(Resource):
-    @ns.marshal_list_with(partir_model)
-    def get(self):
-        return get_all_partir()
-    
-    @ns.expect(partir_input_model)
-    def post(self):
-        create_partir(id_terminal=ns.payload["id_terminal"], id_vol=ns.payload["id_vol"], date_heure_depart=ns.payload["date_heure_depart"])
-        return {}, 201
-
-@ns.route("/arrivees")
-class ArriverCollection(Resource):
-    @ns.marshal_list_with(arriver_model)
-    def get(self):
-        return get_all_arriver()
-
-    @ns.expect(arriver_input_model)
-    def post(self):
-        create_arriver(id_terminal=ns.payload["id_terminal"], id_vol=ns.payload["id_vol"], date_heure_arrivee=ns.payload["date_heure_arrivee"])
-        return {}, 201
-
 @ns.route("/vols")
 class VolCollection(Resource):
     @ns.marshal_list_with(vol_model)
@@ -183,7 +141,7 @@ class VolCollection(Resource):
     
     @ns.expect(vol_input_model)
     def post(self):
-        create_vol(nom_vol=ns.payload["nom_vol"], id_compagnie=ns.payload["id_compagnie"])
+        create_vol(nom_vol=ns.payload["nom_vol"], id_compagnie=ns.payload["id_compagnie"], id_terminal_depart=ns.payload["id_terminal_depart"], id_terminal_arrivee=ns.payload["id_terminal_arrivee"], date_heure_depart=ns.payload["date_heure_depart"], date_heure_arrivee=ns.payload["date_heure_arrivee"])
         return {}, 201
 
 @ns.route("/vols/<int:id_vol>")
@@ -199,7 +157,7 @@ class VolItem(Resource):
     @ns.expect(vol_input_model)
     @ns.marshal_with(vol_model)
     def put(self,id_vol):
-        vol = modify_vol(id_vol,ns.payload["nom_vol"], ns.payload["id_compagnie"])
+        vol = modify_vol(id_vol,ns.payload["nom_vol"], ns.payload["id_compagnie"], ns.payload["id_terminal_depart"], ns.payload["id_terminal_arrivee"], ns.payload["date_heure_depart"], ns.payload["date_heure_arrivee"])
         if vol is None:
             abort(404,"Vol not found")
         return vol, 200  
