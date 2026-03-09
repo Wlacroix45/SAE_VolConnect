@@ -33,22 +33,12 @@ class Vol(db.Model):
     nom_vol = db.Column(db.String(100))
     id_compagnie = db.Column(db.Integer, db.ForeignKey('Compagnie.id_compagnie'))
     compagnie = db.relationship('Compagnie', backref=db.backref('Vol', lazy="dynamic", cascade="all, delete-orphan"))
-
-class Partir(db.Model):
-    __tablename__ = 'Partir'
-    id_terminal = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'), primary_key=True)
-    id_vol = db.Column(db.Integer, db.ForeignKey('Vol.id_vol'), primary_key=True)
+    id_terminal_depart = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'))
+    id_terminal_arrivee = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'))
     date_heure_depart = db.Column(db.DateTime)
-    terminal = db.relationship('Terminal', backref=db.backref('Partir', lazy="dynamic", cascade="all, delete-orphan"))
-    vol = db.relationship('Vol', backref=db.backref('Partir', lazy="dynamic", cascade="all, delete-orphan"))
-
-class Arriver(db.Model):
-    __tablename__ = 'Arriver'
-    id_terminal = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'), primary_key=True)
-    id_vol = db.Column(db.Integer, db.ForeignKey('Vol.id_vol'), primary_key=True)
     date_heure_arrivee = db.Column(db.DateTime)
-    terminal = db.relationship('Terminal', backref=db.backref('Arriver', lazy="dynamic", cascade="all, delete-orphan"))
-    vol = db.relationship('Vol', backref=db.backref('Arriver', lazy="dynamic", cascade="all, delete-orphan"))
+    terminal_depart = db.relationship('Terminal', foreign_keys=[id_terminal_depart], backref=db.backref('Vol_depart', lazy="dynamic"))
+    terminal_arrivee = db.relationship('Terminal', foreign_keys=[id_terminal_arrivee], backref=db.backref('Vol_arrivee', lazy="dynamic"))
 
 def get_all_compagnies():
     return Compagnie.query.all()
@@ -116,43 +106,33 @@ def modify_terminal(id, nom_terminal, id_aeroport):
 def get_all_vols():
     return Vol.query.all()
 
-def create_vol(nom_vol, id_compagnie):
-    vol = Vol(nom_vol=nom_vol, id_compagnie=id_compagnie)
+def create_vol(nom_vol, id_compagnie, id_terminal_depart, id_terminal_arrivee, date_heure_depart, date_heure_arrivee):
+    if isinstance(date_heure_depart, str):
+        date_heure_depart = datetime.fromisoformat(date_heure_depart)
+    if isinstance(date_heure_arrivee, str):
+        date_heure_arrivee = datetime.fromisoformat(date_heure_arrivee)
+    
+    vol = Vol(nom_vol=nom_vol, id_compagnie=id_compagnie, id_terminal_depart=id_terminal_depart, id_terminal_arrivee=id_terminal_arrivee, date_heure_depart=date_heure_depart, date_heure_arrivee=date_heure_arrivee)
     db.session.add(vol)
     db.session.commit()
     return vol
 
-def modify_vol(id, nom_vol, id_compagnie):
+def modify_vol(id, nom_vol, id_compagnie, id_terminal_depart, id_terminal_arrivee, date_heure_depart, date_heure_arrivee):
     vol = Vol.query.get(id)
     if vol is None:
         return None
-    vol.nom_vol = nom_vol
-    vol.id_compagnie = id_compagnie
-    db.session.commit()
-    return vol
-
-
-def get_all_partir():
-    return Partir.query.all()
-
-def create_partir(id_terminal, id_vol, date_heure_depart):
     if isinstance(date_heure_depart, str):
         date_heure_depart = datetime.fromisoformat(date_heure_depart)
-    partir = Partir(id_terminal=id_terminal, id_vol=id_vol, date_heure_depart=date_heure_depart)
-    db.session.add(partir)
-    db.session.commit()
-    return partir
-
-def get_all_arriver():
-    return Arriver.query.all()
-
-def create_arriver(id_terminal, id_vol, date_heure_arrivee):
     if isinstance(date_heure_arrivee, str):
         date_heure_arrivee = datetime.fromisoformat(date_heure_arrivee)
-    arrivee = Arriver(id_terminal=id_terminal, id_vol=id_vol, date_heure_arrivee=date_heure_arrivee)
-    db.session.add(arrivee)
+    vol.nom_vol = nom_vol
+    vol.id_compagnie = id_compagnie
+    vol.id_terminal_depart = id_terminal_depart
+    vol.id_terminal_arrivee = id_terminal_arrivee
+    vol.date_heure_depart = date_heure_depart
+    vol.date_heure_arrivee = date_heure_arrivee
     db.session.commit()
-    return arrivee
+    return vol
 
 def get_compagnie(id):
     return Compagnie.query.get(id)
@@ -196,28 +176,5 @@ def get_vols_by_compagnie(id_compagnie):
 def get_terminaux_by_aeroport(id_aeroport):
     return Terminal.query.filter_by(id_aeroport=id_aeroport).all()
 
-def get_departs_by_terminal(id_terminal):
-    departs = Partir.query.filter_by(id_terminal=id_terminal).all()
-    result = []
-    for depart in departs:
-        vol = Vol.query.get(depart.id_vol)
-        result.append({
-            "id_vol": vol.id_vol,
-            "nom_vol": vol.nom_vol,
-            "id_compagnie": vol.id_compagnie,
-            "date_heure_depart": depart.date_heure_depart
-        })
-    return result
 
-def get_arrivees_by_terminal(id_terminal):
-    arrivees = Arriver.query.filter_by(id_terminal=id_terminal).all()
-    result = []
-    for arrivee in arrivees:
-        vol = Vol.query.get(arrivee.id_vol)
-        result.append({
-            "id_vol": vol.id_vol,
-            "nom_vol": vol.nom_vol,
-            "id_compagnie": vol.id_compagnie,
-            "date_heure_arrivee": arrivee.date_heure_arrivee
-        })
-    return result
+
