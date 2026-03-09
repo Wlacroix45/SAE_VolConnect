@@ -33,22 +33,12 @@ class Vol(db.Model):
     nom_vol = db.Column(db.String(100))
     id_compagnie = db.Column(db.Integer, db.ForeignKey('Compagnie.id_compagnie'))
     compagnie = db.relationship('Compagnie', backref=db.backref('Vol', lazy="dynamic", cascade="all, delete-orphan"))
-
-class Partir(db.Model):
-    __tablename__ = 'Partir'
-    id_terminal = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'), primary_key=True)
-    id_vol = db.Column(db.Integer, db.ForeignKey('Vol.id_vol'), primary_key=True)
+    id_terminal_depart = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'))
+    id_terminal_arrivee = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'))
     date_heure_depart = db.Column(db.DateTime)
-    terminal = db.relationship('Terminal', backref=db.backref('Partir', lazy="dynamic", cascade="all, delete-orphan"))
-    vol = db.relationship('Vol', backref=db.backref('Partir', lazy="dynamic", cascade="all, delete-orphan"))
-
-class Arriver(db.Model):
-    __tablename__ = 'Arriver'
-    id_terminal = db.Column(db.Integer, db.ForeignKey('Terminal.id_terminal'), primary_key=True)
-    id_vol = db.Column(db.Integer, db.ForeignKey('Vol.id_vol'), primary_key=True)
     date_heure_arrivee = db.Column(db.DateTime)
-    terminal = db.relationship('Terminal', backref=db.backref('Arriver', lazy="dynamic", cascade="all, delete-orphan"))
-    vol = db.relationship('Vol', backref=db.backref('Arriver', lazy="dynamic", cascade="all, delete-orphan"))
+    terminal_depart = db.relationship('Terminal', foreign_keys=[id_terminal_depart], backref=db.backref('Vol_depart', lazy="dynamic"))
+    terminal_arrivee = db.relationship('Terminal', foreign_keys=[id_terminal_arrivee], backref=db.backref('Vol_arrivee', lazy="dynamic"))
 
 def get_all_compagnies():
     return Compagnie.query.all()
