@@ -16,12 +16,12 @@ export default class AeroportAll{
     async render(){
         let aeroports = await AeroportProvider.fetchAeroports(10, this.page_ac);
         let view = `
-            <h2 style="text-align: center;">Tous les articles</h2>
+            <h2 style="text-align: center;">Tous les aeroports</h2>
             <ul class="list-group">
                 ${aeroports.map(
                     aeroports => 
                         `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/articles/${aeroports.id}">${articles.nom_aeroport}</a></li>
+                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/aeroports/${aeroports.id}">${aeroports.nom_aeroport}</a></li>
                     `
                 ).join("\n")}
              </ul>

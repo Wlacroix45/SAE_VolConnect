@@ -12,7 +12,7 @@ export default class AeroportProvider{
         try{
             const response = await fetch(`${AEROPORT}?_page=${page_ac}&_per_page=${nb}`);
             const json = await response.json();
-            return json.data || [];
+            return json;
         }catch(err){
             console.log('Error getting documents.', err);
             return [];
