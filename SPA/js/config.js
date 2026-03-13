@@ -1,0 +1,1 @@
+export const AEROPORT = 'http://localhost:8000/aeroports';
