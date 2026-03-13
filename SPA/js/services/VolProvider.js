@@ -28,7 +28,7 @@ export default class VolProvider{
         };
 
         try{
-            const response = await fetch(`${COMPAGNIE}/${id}`);
+            const response = await fetch(`${VOL}/${id}`);
             const json = await response.json();
             return json;
         }catch(err){

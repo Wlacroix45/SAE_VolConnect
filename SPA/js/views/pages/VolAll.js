@@ -21,7 +21,7 @@ export default class VolAll{
                 ${vols.map(
                     vols => 
                         `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/vols/${vols.id_vol}">${vols.id_vol}</a></li>
+                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/vols/${vols.id_vol}">${vols.nom_vol}</a></li>
                     `
                 ).join("\n")}
              </ul>

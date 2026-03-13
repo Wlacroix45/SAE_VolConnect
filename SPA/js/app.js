@@ -7,6 +7,8 @@ import TerminalAll from "./views/pages/TerminalAll.js";
 import TerminalShow from "./views/pages/TerminalShow.js";
 import CompagnieAll from "./views/pages/CompagnieAll.js";
 import CompagnieShow from "./views/pages/CompagnieShow.js";
+import VolAll from "./views/pages/VolAll.js";
+import VolShow from "./views/pages/VolShow.js";
 
 const routes = {
     '/' : Home,
@@ -15,7 +17,9 @@ const routes = {
     '/terminaux' : TerminalAll,
     '/terminaux/:id' : TerminalShow,
     '/compagnies' : CompagnieAll,
-    '/compagnies/:id' : CompagnieShow
+    '/compagnies/:id' : CompagnieShow,
+    '/vols' : VolAll,
+    '/vols/:id' : VolShow
 
 };
 
@@ -26,7 +30,7 @@ const router = async()=>{
     let parsedUrl = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
     console.log(parsedUrl);
     let page= routes[parsedUrl] ? new routes[parsedUrl] : new Error404;
-    if (page instanceof AeroportAll || page instanceof TerminalAll || page instanceof CompagnieAll) {
+    if (page instanceof AeroportAll || page instanceof TerminalAll || page instanceof CompagnieAll || page instanceof VolAll){
         window.currentArticlePage = page;
     }
     content.innerHTML = await page.render();
