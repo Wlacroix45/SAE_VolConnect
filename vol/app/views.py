@@ -1,12 +1,16 @@
 from flask_restx import Resource, Namespace, abort
 from .models import *
 from .api_models import *
+from flask import request
 ns = Namespace("api")
 
 @ns.route("/compagnies")
 class CompagnieCollection(Resource):
     @ns.marshal_list_with(compagnie_model)
     def get(self):
+        nom_comp = request.args.get('nom_comp')
+        if nom_comp:
+            return Compagnie.query.filter(Compagnie.nom_comp.ilike(f"%{nom_comp}%")).all()
         return get_all_compagnies()
     
     @ns.expect(compagnie_input_model)
@@ -50,6 +54,9 @@ class CompagnieVolsCollection(Resource):
 class AeroportCollection(Resource):
     @ns.marshal_list_with(aeroport_model)
     def get(self):
+        nom_aeroport = request.args.get('nom_aeroport')
+        if nom_aeroport:
+            return Aeroport.query.filter(Aeroport.nom_aeroport.ilike(f"%{nom_aeroport}%")).all()
         return get_all_aeroports()
     
     @ns.expect(aeroport_input_model)
@@ -104,6 +111,9 @@ class LocaliserCollection(Resource):
 class TerminalCollection(Resource):
     @ns.marshal_list_with(terminal_model)
     def get(self):
+        nom_terminal = request.args.get('nom_terminal')
+        if nom_terminal:
+            return Terminal.query.filter(Terminal.nom_terminal.ilike(f"%{nom_terminal}%")).all()
         return get_all_terminaux()
     
     @ns.expect(terminal_input_model)
@@ -137,6 +147,9 @@ class TerminalItem(Resource):
 class VolCollection(Resource):
     @ns.marshal_list_with(vol_model)
     def get(self):
+        nom_vol = request.args.get('nom_vol')
+        if nom_vol:
+            return Vol.query.filter(Vol.nom_vol.ilike(f"%{nom_vol}%")).all()
         return get_all_vols()
     
     @ns.expect(vol_input_model)
