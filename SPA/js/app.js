@@ -5,13 +5,17 @@ import AeroportAll from "./views/pages/AeroportAll.js";
 import AeroportShow from "./views/pages/AeroportShow.js";
 import TerminalAll from "./views/pages/TerminalAll.js";
 import TerminalShow from "./views/pages/TerminalShow.js";
+import CompagnieAll from "./views/pages/CompagnieAll.js";
+import CompagnieShow from "./views/pages/CompagnieShow.js";
 
 const routes = {
     '/' : Home,
     '/aeroports' : AeroportAll,
     '/aeroports/:id' : AeroportShow,
     '/terminaux' : TerminalAll,
-    '/terminaux/:id' : TerminalShow
+    '/terminaux/:id' : TerminalShow,
+    '/compagnies' : CompagnieAll,
+    '/compagnies/:id' : CompagnieShow
 
 };
 
@@ -22,7 +26,7 @@ const router = async()=>{
     let parsedUrl = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
     console.log(parsedUrl);
     let page= routes[parsedUrl] ? new routes[parsedUrl] : new Error404;
-    if (page instanceof AeroportAll || page instanceof TerminalAll) {
+    if (page instanceof AeroportAll || page instanceof TerminalAll || page instanceof CompagnieAll) {
         window.currentArticlePage = page;
     }
     content.innerHTML = await page.render();

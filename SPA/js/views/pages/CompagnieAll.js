@@ -16,12 +16,12 @@ export default class CompagnieAll{
     async render(){
         let compagnies = await CompagnieProvider.fetchCompagnies(10, this.page_ac);
         let view = `
-            <h2 style="text-align: center;">Toutes les compagni</h2>
+            <h2 style="text-align: center;">Toutes les compagnies</h2>
             <ul class="list-group">
                 ${compagnies.map(
                     compagnies => 
                         `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/terminaux/${compagnies.id_compagnie}">${compagnies.nom_comp}</a></li>
+                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/compagnies/${compagnies.id_compagnie}">${compagnies.nom_comp}</a></li>
                     `
                 ).join("\n")}
              </ul>
