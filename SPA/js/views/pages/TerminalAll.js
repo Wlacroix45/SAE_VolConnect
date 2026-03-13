@@ -1,6 +1,6 @@
-import AeroportProvider from "../../services/AeroportProvider.js";
+import TerminalProvider from "../../services/TerminalProvider.js";
 
-export default class AeroportAll{
+export default class TerminalAll{
     constructor() {
         this.page_ac = 1;
         this.items_per_page = 10;
@@ -14,14 +14,14 @@ export default class AeroportAll{
     }
 
     async render(){
-        let aeroports = await AeroportProvider.fetchAeroports(10, this.page_ac);
+        let terminaux = await TerminalProvider.fetchTerminaux(10, this.page_ac);
         let view = `
-            <h2 style="text-align: center;">Tous les aeroports</h2>
+            <h2 style="text-align: center;">Tous les terminaux</h2>
             <ul class="list-group">
-                ${aeroports.map(
-                    aeroports => 
+                ${terminaux.map(
+                    terminaux => 
                         `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/aeroports/${aeroports.id_aeroport}">${aeroports.nom_aeroport}</a></li>
+                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/terminaux/${terminaux.id_terminal}">${terminaux.nom_terminal}</a></li>
                     `
                 ).join("\n")}
              </ul>
