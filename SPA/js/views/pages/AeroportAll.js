@@ -21,7 +21,7 @@ export default class AeroportAll{
                 ${aeroports.map(
                     aeroports => 
                         `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/aeroports/${aeroports.id}">${aeroports.nom_aeroport}</a></li>
+                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/aeroports/${aeroports.id_aeroport}">${aeroports.nom_aeroport}</a></li>
                     `
                 ).join("\n")}
              </ul>
