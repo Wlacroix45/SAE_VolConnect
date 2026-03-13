@@ -3,11 +3,15 @@ import Home from "./views/pages/home.js";
 import Error404 from "./views/pages/Error404.js";
 import AeroportAll from "./views/pages/AeroportAll.js";
 import AeroportShow from "./views/pages/AeroportShow.js";
+import TerminalAll from "./views/pages/TerminalAll.js";
+import TerminalShow from "./views/pages/TerminalShow.js";
 
 const routes = {
     '/' : Home,
     '/aeroports' : AeroportAll,
-    '/aeroports/:id' : AeroportShow
+    '/aeroports/:id' : AeroportShow,
+    '/terminaux' : TerminalAll,
+    '/terminaux/:id' : TerminalShow
 
 };
 
@@ -18,7 +22,7 @@ const router = async()=>{
     let parsedUrl = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
     console.log(parsedUrl);
     let page= routes[parsedUrl] ? new routes[parsedUrl] : new Error404;
-    if (page instanceof AeroportAll) {
+    if (page instanceof AeroportAll || page instanceof TerminalAll) {
         window.currentArticlePage = page;
     }
     content.innerHTML = await page.render();
