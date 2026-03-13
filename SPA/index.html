@@ -11,6 +11,7 @@
       href="https://getbootstrap.com/docs/5.3/examples/dashboard/"
     />
     <script src="./js/dashboard/assets/js/color-modes.js"></script>
+    <script type="module" src="./js/app.js"></script>
     <link href="./js/dashboard/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <meta name="theme-color" content="#712cf9" />
     <link href="./js/dashboard/assets/dist/css/dashboard.css" rel="stylesheet" />
@@ -325,7 +326,7 @@
             </div>
           </div>
         </div> 
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="main">
           
         </main>
       </div>
@@ -340,6 +341,10 @@
       crossorigin="anonymous"
       class="astro-vvvwv3sm"
     ></script>
-    <script src="./js/dashboard/assets/js/dashboard.js" class="astro-vvvwv3sm"></script>
+    <script type="module">
+        let url = location;
+        console.log(location);
+    </script>
+    <!-- <script src="./js/dashboard/assets/js/dashboard.js" class="astro-vvvwv3sm"></script> -->
   </body>
 </html>

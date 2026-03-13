@@ -1,11 +1,9 @@
 import Utils from "./services/Utils.js";
-import AeroportAll from "./views/pages/AeroportAll.js";
 import Home from "./views/pages/home.js";
 import Error404 from "./views/pages/Error404.js";
 
 const routes = {
-    '/' : Home,
-    '/aeroports' : AeroportAll,
+    '/' : Home
 };
 
 const router = async()=>{
