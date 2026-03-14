@@ -1,4 +1,5 @@
 import TerminalProvider from "../../services/TerminalProvider.js";
+import AeroportProvider from "../../services/AeroportProvider.js";
 
 export default class TerminalAll{
     constructor() {
@@ -37,11 +38,20 @@ export default class TerminalAll{
                 <button class="btn btn-outline-success" type="submit">Filtrer</button>
             </form>
             <ul class="list-group">
-                ${terminaux.map(
-                    terminaux => 
-                        `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/terminaux/${terminaux.id_terminal}">${terminaux.nom_terminal}</a></li>
-                    `
+                ${(
+                    await Promise.all(
+                        terminaux.map(async (terminal) => {
+                            const aeroport = await AeroportProvider.getAeroport(terminal.id_aeroport);
+                            console.log(aeroport);
+                            return `
+                                <li class="list-group-item">
+                                    <a class="list-group-item list-group-item-action" href="#/terminaux/${terminal.id_terminal}">
+                                        ${terminal.nom_terminal} de ${aeroport?.nom_aeroport ?? "Aeroport inconnu"}
+                                    </a>
+                                </li>
+                            `;
+                        })
+                    )
                 ).join("\n")}
              </ul>
 
