@@ -1,7 +1,7 @@
 import { TERMINAL } from "../config.js";
 
 export default class TerminalProvider{
-    static fetchTerminaux = async (nb=10, page_ac=1) =>{
+    static fetchTerminaux = async (nb=10, page_ac=1, nom_terminal="") =>{
         const options = {
             method : "GET",
             headers : {
@@ -10,7 +10,15 @@ export default class TerminalProvider{
         };
 
         try{
-            const response = await fetch(`${TERMINAL}?_page=${page_ac}&_per_page=${nb}`);
+            const params = new URLSearchParams({
+                _page: page_ac,
+                _per_page: nb
+            });            
+            if (nom_terminal && nom_terminal.trim() !== "") {
+                params.set("nom_terminal", nom_terminal.trim());
+            }
+                               
+            const response = await fetch(`${TERMINAL}?${params.toString()}`);
             const json = await response.json();
             return json;
         }catch(err){

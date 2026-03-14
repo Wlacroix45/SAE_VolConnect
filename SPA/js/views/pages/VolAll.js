@@ -16,7 +16,7 @@ export default class VolAll{
 
     async submitFilter(event) {
         event.preventDefault();
-        const nomRentre = document.querySelector('#compagnie-search-input');
+        const nomRentre = document.querySelector('#vol-search-input');
         this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
         await this.setPage(1);
     }
@@ -27,7 +27,7 @@ export default class VolAll{
             <h2 style="text-align: center;">Tous les vols</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
                 <input
-                    id="compagnie-search-input"
+                    id="vol-search-input"
                     class="form-control me-2"
                     type="search"
                     placeholder="Chercher par nom"
