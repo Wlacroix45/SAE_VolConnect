@@ -17,6 +17,10 @@ export default class AeroportAll{
         let aeroports = await AeroportProvider.fetchAeroports(10, this.page_ac);
         let view = `
             <h2 style="text-align: center;">Tous les aeroports</h2>
+            <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
             <ul class="list-group">
                 ${aeroports.map(
                     aeroports => 
