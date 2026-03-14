@@ -1,7 +1,7 @@
 import { AEROPORT } from "../config.js";
 
 export default class AeroportProvider{
-    static fetchAeroports = async (nb=10, page_ac=1, nomAeroport="") =>{
+    static fetchAeroports = async (nb=10, page_ac=1, nom_aeroport="") =>{
         const options = {
             method : "GET",
             headers : {
@@ -15,8 +15,8 @@ export default class AeroportProvider{
                 _per_page: nb
             });
 
-            if (nomAeroport && nomAeroport.trim() !== "") {
-                params.set("nom_aeroport", nomAeroport.trim());
+            if (nom_aeroport && nom_aeroport.trim() !== "") {
+                params.set("nom_aeroport", nom_aeroport.trim());
             }
 
             const response = await fetch(`${AEROPORT}?${params.toString()}`);
