@@ -5,6 +5,7 @@ export default class CompagnieAll{
         this.page_ac = 1;
         this.items_per_page = 10;
         this.total_pages = null;
+        this.nomCherche = "";
     }
 
     async setPage(newPage) {
@@ -13,10 +14,28 @@ export default class CompagnieAll{
         content.innerHTML = await this.render();
     }
 
+    async submitFilter(event) {
+        event.preventDefault();
+        const nomRentre = document.querySelector('#compagnie-search-input');
+        this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
+        await this.setPage(1);
+    }
+
     async render(){
-        let compagnies = await CompagnieProvider.fetchCompagnies(10, this.page_ac);
+        let compagnies = await CompagnieProvider.fetchCompagnies(10, this.page_ac, this.nomCherche);
         let view = `
             <h2 style="text-align: center;">Toutes les compagnies</h2>
+            <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
+                <input
+                    id="compagnie-search-input"
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Chercher par nom"
+                    aria-label="Search"
+                    value="${this.nomCherche}"
+                />
+                <button class="btn btn-outline-success" type="submit">Filtrer</button>
+            </form>
             <ul class="list-group">
                 ${compagnies.map(
                     compagnies => 
@@ -25,7 +44,6 @@ export default class CompagnieAll{
                     `
                 ).join("\n")}
              </ul>
-
             <nav aria-label="Page navigation exemple">
                 <ul class="pagination">
                     <li class="page-item ${this.page_ac === 1 ? 'disabled' : ''}">

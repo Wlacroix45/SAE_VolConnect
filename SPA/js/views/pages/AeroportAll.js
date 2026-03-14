@@ -5,6 +5,7 @@ export default class AeroportAll{
         this.page_ac = 1;
         this.items_per_page = 10;
         this.total_pages = null;
+        this.nomCherche = "";
     }
 
     async setPage(newPage) {
@@ -13,13 +14,31 @@ export default class AeroportAll{
         content.innerHTML = await this.render();
     }
 
+    async submitFilter(event) {
+        event.preventDefault();
+        const nomRentre = document.querySelector('#aeroport-search-input');
+        this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
+        await this.setPage(1);
+    }
+
     async render(){
-        let aeroports = await AeroportProvider.fetchAeroports(10, this.page_ac);
+        let aeroports = await AeroportProvider.fetchAeroports(10, this.page_ac, this.nomCherche);
         let view = `
             <h2 style="text-align: center;">Tous les aeroports</h2>
+            <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
+                <input
+                    id="aeroport-search-input"
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Chercher par nom"
+                    aria-label="Search"
+                    value="${this.nomCherche}"
+                />
+                <button class="btn btn-outline-success" type="submit">Filtrer</button>
+            </form>
             <ul class="list-group">
                 ${aeroports.map(
-                    aeroports => 
+                    aeroports =>
                         `
                             <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/aeroports/${aeroports.id_aeroport}">${aeroports.nom_aeroport}</a></li>
                     `
@@ -49,7 +68,7 @@ export default class AeroportAll{
                     </li>
                 </ul>
             </nav>
-        `; 
+        `;
     return view;
     }
 }

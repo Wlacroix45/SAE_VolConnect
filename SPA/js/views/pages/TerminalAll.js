@@ -5,6 +5,7 @@ export default class TerminalAll{
         this.page_ac = 1;
         this.items_per_page = 10;
         this.total_pages = null;
+        this.nomCherche = "";
     }
 
     async setPage(newPage) {
@@ -13,10 +14,28 @@ export default class TerminalAll{
         content.innerHTML = await this.render();
     }
 
+    async submitFilter(event) {
+        event.preventDefault();
+        const nomRentre = document.querySelector('#terminal-search-input');
+        this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
+        await this.setPage(1);
+    }
+
     async render(){
-        let terminaux = await TerminalProvider.fetchTerminaux(10, this.page_ac);
+        let terminaux = await TerminalProvider.fetchTerminaux(10, this.page_ac, this.nomCherche);
         let view = `
             <h2 style="text-align: center;">Tous les terminaux</h2>
+            <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
+                <input
+                    id="terminal-search-input"
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Chercher par nom"
+                    aria-label="Search"
+                    value="${this.nomCherche}"
+                />
+                <button class="btn btn-outline-success" type="submit">Filtrer</button>
+            </form>
             <ul class="list-group">
                 ${terminaux.map(
                     terminaux => 
