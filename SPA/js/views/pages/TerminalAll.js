@@ -1,4 +1,5 @@
 import TerminalProvider from "../../services/TerminalProvider.js";
+import AeroportProvider from "../../services/AeroportProvider.js";
 
 export default class TerminalAll{
     constructor() {
@@ -9,8 +10,9 @@ export default class TerminalAll{
     }
 
     async setPage(newPage) {
-        this.page_ac = newPage;
-        const content = document.querySelector('#main');
+        const maxPage = this.total_pages || 1;
+        this.page_ac = Math.min(Math.max(1, newPage), maxPage);
+        const content = document.querySelector("#main");
         content.innerHTML = await this.render();
     }
 
@@ -21,8 +23,16 @@ export default class TerminalAll{
         await this.setPage(1);
     }
 
-    async render(){
-        let terminaux = await TerminalProvider.fetchTerminaux(10, this.page_ac, this.nomCherche);
+    async render() {
+        const rawTerminaux = await TerminalProvider.fetchTerminaux(this.items_per_page, 1, this.nomCherche);
+        const allTerminaux = Array.isArray(rawTerminaux)
+            ? rawTerminaux
+            : (Array.isArray(rawTerminaux.items) ? rawTerminaux.items : []);
+        this.total_pages = Math.max(1, Math.ceil(allTerminaux.length / this.items_per_page));
+        this.page_ac = Math.min(Math.max(1, this.page_ac), this.total_pages);
+        const start = (this.page_ac - 1) * this.items_per_page;
+        const terminaux = allTerminaux.slice(start, start + this.items_per_page);
+        const aeroportCache = new Map();
         let view = `
             <h2 style="text-align: center;">Tous les terminaux</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
@@ -36,40 +46,55 @@ export default class TerminalAll{
                 />
                 <button class="btn btn-outline-success" type="submit">Filtrer</button>
             </form>
+
             <ul class="list-group">
-                ${terminaux.map(
-                    terminaux => 
-                        `
-                            <li class="list-group-item"><a class="list-group-item list-group-item-action" href="#/terminaux/${terminaux.id_terminal}">${terminaux.nom_terminal}</a></li>
-                    `
+                ${(
+                    await Promise.all(
+                        terminaux.map(async (terminal) => {
+                            let aeroport = aeroportCache.get(terminal.id_aeroport);
+                            if (!aeroport) {
+                                aeroport = await AeroportProvider.getAeroport(terminal.id_aeroport);
+                                aeroportCache.set(terminal.id_aeroport, aeroport);
+                            }
+
+                            return `
+                                <li class="list-group-item">
+                                    <a class="list-group-item list-group-item-action" href="#/terminaux/${terminal.id_terminal}">
+                                        ${terminal.nom_terminal} ${aeroport?.nom_aeroport ?? "Aeroport inconnu"}
+                                    </a>
+                                </li>
+                            `;
+                        })
+                    )
                 ).join("\n")}
-             </ul>
+            </ul>
 
             <nav aria-label="Page navigation exemple">
                 <ul class="pagination">
-                    <li class="page-item ${this.page_ac === 1 ? 'disabled' : ''}">
-                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${Math.max(1, this.page_ac - 1)})" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                    <li class="page-item ${this.page_ac === 1 ? "disabled" : ""}">
+                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${this.page_ac - 1})" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item ${this.page_ac === 1 ? 'active' : ''}">
-                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(1)">1</a>
-                    </li>
-                    <li class="page-item ${this.page_ac === 2 ? 'active' : ''}">
-                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(2)">2</a>
-                    </li>
-                    <li class="page-item ${this.page_ac === 3 ? 'active' : ''}">
-                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(3)">3</a>
-                    </li>
-                    <li class="page-item">
+
+                    ${Array.from({ length: this.total_pages }, (_, i) => i + 1)
+                        .map((page) => `
+                            <li class="page-item ${this.page_ac === page ? "active" : ""}">
+                                <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${page})">${page}</a>
+                            </li>
+                        `)
+                        .join("\n")}
+
+                    <li class="page-item ${this.page_ac === this.total_pages ? "disabled" : ""}">
                         <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${this.page_ac + 1})" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
+                            <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </ul>
             </nav>
-        `; 
-    return view;
+        `;
+
+        return view;
     }
 }
 
