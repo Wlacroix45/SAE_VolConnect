@@ -25,17 +25,13 @@ export default class AeroportAll{
 
     async render() {
         const rawAeroports = await AeroportProvider.fetchAeroports(this.items_per_page, 1, this.nomCherche);
-
         const allAeroports = Array.isArray(rawAeroports)
             ? rawAeroports
             : (Array.isArray(rawAeroports.items) ? rawAeroports.items : []);
-
         this.total_pages = Math.max(1, Math.ceil(allAeroports.length / this.items_per_page));
         this.page_ac = Math.min(Math.max(1, this.page_ac), this.total_pages);
-
         const start = (this.page_ac - 1) * this.items_per_page;
         const aeroports = allAeroports.slice(start, start + this.items_per_page);
-
         let view = `
             <h2 style="text-align: center;">Tous les aeroports</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">

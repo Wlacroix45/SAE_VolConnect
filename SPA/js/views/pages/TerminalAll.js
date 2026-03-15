@@ -25,19 +25,14 @@ export default class TerminalAll{
 
     async render() {
         const rawTerminaux = await TerminalProvider.fetchTerminaux(this.items_per_page, 1, this.nomCherche);
-
         const allTerminaux = Array.isArray(rawTerminaux)
             ? rawTerminaux
             : (Array.isArray(rawTerminaux.items) ? rawTerminaux.items : []);
-
         this.total_pages = Math.max(1, Math.ceil(allTerminaux.length / this.items_per_page));
         this.page_ac = Math.min(Math.max(1, this.page_ac), this.total_pages);
-
         const start = (this.page_ac - 1) * this.items_per_page;
         const terminaux = allTerminaux.slice(start, start + this.items_per_page);
-
         const aeroportCache = new Map();
-
         let view = `
             <h2 style="text-align: center;">Tous les terminaux</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">

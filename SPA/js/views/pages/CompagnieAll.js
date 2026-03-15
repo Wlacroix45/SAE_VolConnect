@@ -25,17 +25,13 @@ export default class CompagnieAll{
 
     async render() {
         const rawCompagnies = await CompagnieProvider.fetchCompagnies(this.items_per_page, 1, this.nomCherche);
-
         const allCompagnies = Array.isArray(rawCompagnies)
             ? rawCompagnies
             : (Array.isArray(rawCompagnies.items) ? rawCompagnies.items : []);
-
         this.total_pages = Math.max(1, Math.ceil(allCompagnies.length / this.items_per_page));
         this.page_ac = Math.min(Math.max(1, this.page_ac), this.total_pages);
-
         const start = (this.page_ac - 1) * this.items_per_page;
         const compagnies = allCompagnies.slice(start, start + this.items_per_page);
-
         let view = `
             <h2 style="text-align: center;">Toutes les compagnies</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
