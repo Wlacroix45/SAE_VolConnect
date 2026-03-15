@@ -2,87 +2,52 @@
 
 -- Donner les villes que nous pouvons atteindre par vols directs en partant de Paris
 
-WITH RECURSIVE vol_dispo AS (
-    SELECT DISTINCT
-        v.id_vol,
-        v.nom_vol,
-        v.ville,
-        v.nom_terminal,
-
-        v.date_heure_depart,
-        0 as niveau
-    FROM vol v
-    WHERE ville = 'Paris'
-
-    UNION ALL
-
-    SELECT 
-        v.id_vol,
-        v.nom_vol,
-        v.ville,
-        v.nom_terminal,
-
-        v.date_heure_depart,
-        ac.niveau + 1
-    FROM vol v
-    JOIN vol_dispo ac
-        ON v.id_vol = ac.id_vol
-)
-SELECT *
-FROM vol_dispo
-WHERE niveau in (
-    SELECT DISTINCT niveau
-    FROM vol_dispo
-    where niveau <3
-);
-
-WITH RECURSIVE arbre_categories AS (
-    -- Niveau 0 : racine
-    SELECT
-        c.id_categorie,
-        c.nom,
-        c.id_parent,
-        0 AS niveau
-    FROM categorie c
-    WHERE c.id_categorie = 1   -- catégorie de départ
-
-    UNION ALL
-
-    -- Niveaux suivants : enfants des nœuds déjà trouvés
-    SELECT
-        c.id_categorie,
-        c.nom,
-        c.id_parent,
-        ac.niveau + 1
-    FROM categorie c
-    JOIN arbre_categories ac
-      ON c.id_parent = ac.id_categorie
-)
-SELECT *
-FROM arbre_categories
-ORDER BY niveau, id_categorie;
+SELECT DISTINCT ville_arr
+FROM vol
+WHERE ville_dep = 'Paris'
+ORDER BY ville_arr;
 
 
 -- même question mais avec UNE correspondance
-SELECT DISTINCT (id_vol, nom_vol, date_heure_depart) as Vol, (id_aeroport, nom, ville, pays) as Destination_Possible 
-FROM vol 
-NATURAL JOIN arriver NATURAL JOIN terminal NATURAL JOIN posseder NATURAL JOIN aeroport 
-NATURAL JOIN partir
-where vol.correspondance = 1
-and partir.id_terminal in (select ville from aeroport where ville = 'PARIS');
+
+SELECT DISTINCT v2.ville_arr
+FROM vol v1
+JOIN vol v2 ON v1.ville_arr = v2.ville_dep
+  AND STR_TO_DATE(v1.date_heure_arrivee, '%Y-%m-%d %H:%i') 
+      < STR_TO_DATE(v2.date_heure_depart, '%Y-%m-%d %H:%i')
+WHERE v1.ville_dep = 'Paris'
+ORDER BY v2.ville_arr;
+
 
 
 -- même question mais avec DEUX correspondances
-SELECT DISTINCT (id_vol, nom_vol, date_heure_depart) as Vol, (id_aeroport, nom, ville, pays) as Destination_Possible 
-FROM vol 
-NATURAL JOIN arriver NATURAL JOIN terminal NATURAL JOIN posseder NATURAL JOIN aeroport 
-NATURAL JOIN partir
-where vol.correspondance = 2
-and partir.id_terminal in (select ville from aeroport where ville = 'PARIS');
+
+SELECT DISTINCT v3.ville_arr
+FROM vol v1
+JOIN vol v2 ON v1.ville_arr = v2.ville_dep
+  AND STR_TO_DATE(v1.date_heure_arrivee, '%Y-%m-%d %H:%i') 
+      < STR_TO_DATE(v2.date_heure_depart, '%Y-%m-%d %H:%i')
+JOIN vol v3 ON v2.ville_arr = v3.ville_dep
+  AND STR_TO_DATE(v2.date_heure_arrivee, '%Y-%m-%d %H:%i') 
+      < STR_TO_DATE(v3.date_heure_depart, '%Y-%m-%d %H:%i')
+WHERE v1.ville_dep = 'Paris'
+ORDER BY v3.ville_arr;
 
 -- même question mais on ne spécifie pas le nb de correspondance
-SELECT DISTINCT (id_vol, nom_vol, date_heure_depart) as Vol, (id_aeroport, nom, ville, pays) as Destination_Possible 
-FROM vol 
-NATURAL JOIN arriver NATURAL JOIN terminal NATURAL JOIN posseder NATURAL JOIN aeroport 
-NATURAL JOIN partir
-where partir.id_terminal in (select ville from aeroport where ville = 'PARIS');
+
+WITH RECURSIVE trajets AS (
+  SELECT ville_arr as destination, date_heure_arrivee as derniere_arrivee, 1 as niveau
+  FROM vol
+  WHERE ville_dep = 'Paris'
+  
+  UNION ALL
+  
+  SELECT v.ville_arr, v.date_heure_arrivee, t.niveau + 1
+  FROM trajets t
+  JOIN vol v ON t.destination = v.ville_dep
+    AND STR_TO_DATE(t.derniere_arrivee, '%Y-%m-%d %H:%i') < STR_TO_DATE(v.date_heure_depart, '%Y-%m-%d %H:%i')
+  WHERE t.niveau < 10
+)
+SELECT DISTINCT destination
+FROM trajets
+ORDER BY destination;
