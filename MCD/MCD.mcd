@@ -1,0 +1,11 @@
+posseder, 1N aeroport, 11 terminal
+aeroport:id_aeroport, nom_aeroport, ville, pays
+localiser, 1N companie, 0N aeroport
+
+terminal:id_terminal, nom_terminal
+arriver, 0N terminal, 11 vol : date_heure_arrivee
+companie: id_companie, nom_comp
+
+partir, 0N terminal, 11 vol : date_heure_depart
+vol:id_vol, nom_vol
+appartenir, 0N companie, 11 vol

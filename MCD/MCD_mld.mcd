@@ -1,0 +1,18 @@
+%%mocodo
+:::
+aeroport: id_aeroport, nom_aeroport, ville, pays
+:
+localiser: #id_companie > companie > id_companie, _#id_aeroport > aeroport > id_aeroport
+:
+
+
+:
+terminal: id_terminal, nom_terminal, #id_aeroport > aeroport > id_aeroport
+:::
+companie: id_companie, nom_comp
+:
+
+
+:::
+vol: id_vol, nom_vol, #id_terminal 1 > terminal > id_terminal, date_heure_arrivee, #id_terminal 2 > terminal > id_terminal, date_heure_depart, #id_companie > companie > id_companie
+:::
