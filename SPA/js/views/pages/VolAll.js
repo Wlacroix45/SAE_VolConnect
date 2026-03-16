@@ -1,0 +1,87 @@
+import VolProvider from "../../services/VolProvider.js";
+
+export default class VolAll{
+    constructor() {
+        this.page_ac = 1;
+        this.items_per_page = 10;
+        this.total_pages = null;
+        this.nomCherche = "";
+    }
+
+    async setPage(newPage) {
+        const maxPage = this.total_pages || 1;
+        this.page_ac = Math.min(Math.max(1, newPage), maxPage);
+
+        const content = document.querySelector("#main");
+        content.innerHTML = await this.render();
+    }
+
+    async submitFilter(event) {
+        event.preventDefault();
+        const nomRentre = document.querySelector('#vol-search-input');
+        this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
+        await this.setPage(1);
+    }
+
+    async render() {
+        const rawVols = await VolProvider.fetchVols(this.items_per_page, 1, this.nomCherche);
+        const allVols = Array.isArray(rawVols)
+            ? rawVols
+            : (Array.isArray(rawVols.items) ? rawVols.items : []);
+        this.total_pages = Math.max(1, Math.ceil(allVols.length / this.items_per_page));
+        this.page_ac = Math.min(Math.max(1, this.page_ac), this.total_pages);
+        const start = (this.page_ac - 1) * this.items_per_page;
+        const vols = allVols.slice(start, start + this.items_per_page);
+        let view = `
+            <h2 style="text-align: center;">Tous les vols</h2>
+            <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
+                <input
+                    id="vol-search-input"
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Chercher par nom"
+                    aria-label="Search"
+                    value="${this.nomCherche}"
+                />
+                <button class="btn btn-outline-success" type="submit">Filtrer</button>
+            </form>
+
+            <ul class="list-group">
+                ${vols.map((vol) => `
+                    <li class="list-group-item">
+                        <a class="list-group-item list-group-item-action" href="#/vols/${vol.id_vol}">
+                            ${vol.nom_vol}
+                        </a>
+                    </li>
+                `).join("\n")}
+            </ul>
+
+            <nav aria-label="Page navigation exemple">
+                <ul class="pagination">
+                    <li class="page-item ${this.page_ac === 1 ? "disabled" : ""}">
+                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${this.page_ac - 1})" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    ${Array.from({ length: this.total_pages }, (_, i) => i + 1)
+                        .map((page) => `
+                            <li class="page-item ${this.page_ac === page ? "active" : ""}">
+                                <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${page})">${page}</a>
+                            </li>
+                        `)
+                        .join("\n")}
+
+                    <li class="page-item ${this.page_ac === this.total_pages ? "disabled" : ""}">
+                        <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${this.page_ac + 1})" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        `;
+
+        return view;
+    }
+}
+
