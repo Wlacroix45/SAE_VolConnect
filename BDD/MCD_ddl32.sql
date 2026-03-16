@@ -16,11 +16,11 @@ CREATE TABLE vol (
   date_heure_arrivee VARCHAR2(42),
   nom_comp           VARCHAR2(42),
   nom_terminal_depart       VARCHAR2(42),
-  nom_terminal_arrrivee       VARCHAR2(42),
+  nom_terminal_arrivee       VARCHAR2(42),
   ville_depart       VARCHAR2(42),
   ville_arrivee       VARCHAR2(42),
   pays_depart               VARCHAR2(42),
-  pays_arrive               VARCHAR2(42),
+  pays_arrivee               VARCHAR2(42),
   equipage           employe_tab,
   PRIMARY KEY (id_vol)
 ) NESTED TABLE equipage STORE AS equipage_nt;
