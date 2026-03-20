@@ -21,3 +21,9 @@ pour supprimer toutes les tables indésirables utiliser la commande @./BDD/dropA
 ensuite il faut vider la corbeille avec purge recyclebin; .
 
 et pour lancer le script sql @./BDD/MCD_ddl32.sql et @./BDD/donnees_32.sql.
+
+- virtualenv -p python3 venv
+- source venv/bin/activate
+- pip install -r requirements.txt
+- flask run 
+- flask run --debug
