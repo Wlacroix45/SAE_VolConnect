@@ -13,3 +13,9 @@ FROM vol v,
     TABLE(v.equipage) t
 WHERE t.poste='Pilote'
 GROUP BY t.nom, t.poste;
+
+SELECT v.id_vol AS vol_id,
+       i.nom_indice AS indice_nom,
+       (i.valeur * i.poids) AS impact
+FROM vol v,
+     TABLE(v.indices_qualite) i;
