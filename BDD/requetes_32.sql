@@ -19,3 +19,11 @@ SELECT v.id_vol AS vol_id,
        (i.valeur * i.poids) AS impact
 FROM vol v,
      TABLE(v.indices_qualite) i;
+
+Select v.id_vol AS vol_id,
+       
+SELECT i.nom_indice AS indice_nom,
+       ROUND(AVG(i.valeur * i.poids), 3) AS impact_moyen
+FROM vol v,
+     TABLE(v.indices_qualite) i
+GROUP BY i.nom_indice;
