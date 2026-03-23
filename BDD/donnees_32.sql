@@ -30,9 +30,9 @@ INSERT INTO vol (
     employe('Durand', 'Hotesse')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.4),
-    indice_qualite('securite', 4.5),
-    indice_qualite('prix', 4.3)
+    indice_qualite('carbone', 3, 4),
+    indice_qualite('securite', 2, 4),
+    indice_qualite('prix', 3, 3)
   )
 );
 
@@ -69,9 +69,9 @@ INSERT INTO vol (
     employe('Roux', 'Steward')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 4.1),
-    indice_qualite('securite', 4.8),
-    indice_qualite('prix', 3.2)
+    indice_qualite('carbone', 4, 3),
+    indice_qualite('securite', 3, 4),
+    indice_qualite('prix', 2, 3)
   )
 );
 
@@ -107,9 +107,9 @@ INSERT INTO vol (
     employe('Williams', 'Hotesse')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.8),
-    indice_qualite('securite', 4.7),
-    indice_qualite('prix', 2.9)
+    indice_qualite('carbone', 4, 4),
+    indice_qualite('securite', 3, 5),
+    indice_qualite('prix', 2, 2)
   )
 );
 
@@ -146,9 +146,9 @@ INSERT INTO vol (
     employe('Weber', 'Steward')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.2),
-    indice_qualite('securite', 4.6),
-    indice_qualite('prix', 4.4)
+    indice_qualite('carbone', 2, 3),
+    indice_qualite('securite', 2, 4),
+    indice_qualite('prix', 3, 4)
   )
 );
 
@@ -184,9 +184,9 @@ INSERT INTO vol (
     employe('Esposito', 'Hotesse')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.6),
-    indice_qualite('securite', 4.9),
-    indice_qualite('prix', 4.1)
+    indice_qualite('carbone', 3, 3),
+    indice_qualite('securite', 3, 5),
+    indice_qualite('prix', 3, 4)
   )
 );
 
@@ -223,9 +223,9 @@ INSERT INTO vol (
     employe('Wilson', 'Steward')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.9),
-    indice_qualite('securite', 4.4),
-    indice_qualite('prix', 3.7)
+    indice_qualite('carbone', 3, 4),
+    indice_qualite('securite', 2, 4),
+    indice_qualite('prix', 3, 4)
   )
 );
 
@@ -261,9 +261,9 @@ INSERT INTO vol (
     employe('Al-Zahra', 'Hotesse')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.5),
-    indice_qualite('securite', 4.8),
-    indice_qualite('prix', 3.9)
+    indice_qualite('carbone', 3, 4),
+    indice_qualite('securite', 3, 5),
+    indice_qualite('prix', 3, 4)
   )
 );
 
@@ -300,9 +300,9 @@ INSERT INTO vol (
     employe('Stewart', 'Steward')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.3),
-    indice_qualite('securite', 4.5),
-    indice_qualite('prix', 4.2)
+    indice_qualite('carbone', 2, 3),
+    indice_qualite('securite', 2, 4),
+    indice_qualite('prix', 3, 4)
   )
 );
 
@@ -338,9 +338,9 @@ INSERT INTO vol (
     employe('Martinez', 'Hotesse')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 4.0),
-    indice_qualite('securite', 4.3),
-    indice_qualite('prix', 3.8)
+    indice_qualite('carbone', 3, 4),
+    indice_qualite('securite', 2, 4),
+    indice_qualite('prix', 3, 3)
   )
 );
 
@@ -377,9 +377,9 @@ INSERT INTO vol (
     employe('Pereira', 'Steward')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.7),
-    indice_qualite('securite', 4.6),
-    indice_qualite('prix', 3.6)
+    indice_qualite('carbone', 3, 3),
+    indice_qualite('securite', 2, 4),
+    indice_qualite('prix', 2, 3)
   )
 );
 
@@ -415,8 +415,8 @@ INSERT INTO vol (
     employe('Singh', 'Hotesse')
   ),
   indice_qualite_tab(
-    indice_qualite('carbone', 3.2),
-    indice_qualite('securite', 4.7),
-    indice_qualite('prix', 4.0)
+    indice_qualite('carbone', 2, 3),
+    indice_qualite('securite', 3, 4),
+    indice_qualite('prix', 3, 4)
   )
 );

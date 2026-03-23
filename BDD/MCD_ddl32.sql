@@ -13,6 +13,7 @@ CREATE OR REPLACE TYPE employe_tab AS TABLE OF employe;
 /
 CREATE OR REPLACE TYPE indice_qualite AS OBJECT (
   nom_indice VARCHAR2(20),
+  valeur NUMBER(3,1),
   poids NUMBER(3,1)
 );
 /
