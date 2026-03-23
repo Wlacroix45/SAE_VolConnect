@@ -10,7 +10,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V001',
   'Vol Paris-Londres',
@@ -27,6 +28,11 @@ INSERT INTO vol (
     employe('Dupont', 'Pilote'),
     employe('Martin', 'Copilote'),
     employe('Durand', 'Hotesse')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.4),
+    indice_qualite('securite', 4.5),
+    indice_qualite('prix', 4.3)
   )
 );
 
@@ -42,7 +48,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V002',
   'Vol Paris-New York',
@@ -60,6 +67,11 @@ INSERT INTO vol (
     employe('Bernard', 'Copilote'),
     employe('Petit', 'Hotesse'),
     employe('Roux', 'Steward')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 4.1),
+    indice_qualite('securite', 4.8),
+    indice_qualite('prix', 3.2)
   )
 );
 
@@ -75,7 +87,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V003',
   'Vol London-Tokyo',
@@ -92,6 +105,11 @@ INSERT INTO vol (
     employe('Smith', 'Pilote'),
     employe('Johnson', 'Copilote'),
     employe('Williams', 'Hotesse')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.8),
+    indice_qualite('securite', 4.7),
+    indice_qualite('prix', 2.9)
   )
 );
 
@@ -107,7 +125,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V004',
   'Vol Berlin-Madrid',
@@ -125,6 +144,11 @@ INSERT INTO vol (
     employe('Schmidt', 'Copilote'),
     employe('Fischer', 'Hotesse'),
     employe('Weber', 'Steward')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.2),
+    indice_qualite('securite', 4.6),
+    indice_qualite('prix', 4.4)
   )
 );
 
@@ -140,7 +164,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V005',
   'Vol Rome-Amsterdam',
@@ -157,6 +182,11 @@ INSERT INTO vol (
     employe('Rossi', 'Pilote'),
     employe('Ferrari', 'Copilote'),
     employe('Esposito', 'Hotesse')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.6),
+    indice_qualite('securite', 4.9),
+    indice_qualite('prix', 4.1)
   )
 );
 
@@ -172,7 +202,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V006',
   'Vol Sydney-Singapore',
@@ -190,6 +221,11 @@ INSERT INTO vol (
     employe('Davis', 'Copilote'),
     employe('Miller', 'Hotesse'),
     employe('Wilson', 'Steward')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.9),
+    indice_qualite('securite', 4.4),
+    indice_qualite('prix', 3.7)
   )
 );
 
@@ -205,7 +241,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V007',
   'Vol Dubai-Cairo',
@@ -222,6 +259,11 @@ INSERT INTO vol (
     employe('Al-Farsi', 'Pilote'),
     employe('Al-Mansoori', 'Copilote'),
     employe('Al-Zahra', 'Hotesse')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.5),
+    indice_qualite('securite', 4.8),
+    indice_qualite('prix', 3.9)
   )
 );
 
@@ -237,7 +279,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V008',
   'Vol Toronto-Vancouver',
@@ -255,6 +298,11 @@ INSERT INTO vol (
     employe('Anderson', 'Copilote'),
     employe('Campbell', 'Hotesse'),
     employe('Stewart', 'Steward')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.3),
+    indice_qualite('securite', 4.5),
+    indice_qualite('prix', 4.2)
   )
 );
 
@@ -270,7 +318,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V009',
   'Vol Mexico City-Lima',
@@ -287,6 +336,11 @@ INSERT INTO vol (
     employe('Garcia', 'Pilote'),
     employe('Rodriguez', 'Copilote'),
     employe('Martinez', 'Hotesse')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 4.0),
+    indice_qualite('securite', 4.3),
+    indice_qualite('prix', 3.8)
   )
 );
 
@@ -302,7 +356,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V010',
   'Vol Sao Paulo-Buenos Aires',
@@ -320,6 +375,11 @@ INSERT INTO vol (
     employe('Santos', 'Copilote'),
     employe('Oliveira', 'Hotesse'),
     employe('Pereira', 'Steward')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.7),
+    indice_qualite('securite', 4.6),
+    indice_qualite('prix', 3.6)
   )
 );
 
@@ -335,7 +395,8 @@ INSERT INTO vol (
   ville_arrivee,
   pays_depart,
   pays_arrivee,
-  equipage
+  equipage,
+  indices_qualite
 ) VALUES (
   'V011',
   'Vol Mumbai-Delhi',
@@ -352,5 +413,10 @@ INSERT INTO vol (
     employe('Patel', 'Pilote'),
     employe('Sharma', 'Copilote'),
     employe('Singh', 'Hotesse')
+  ),
+  indice_qualite_tab(
+    indice_qualite('carbone', 3.2),
+    indice_qualite('securite', 4.7),
+    indice_qualite('prix', 4.0)
   )
 );
