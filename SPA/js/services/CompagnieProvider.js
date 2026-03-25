@@ -44,4 +44,21 @@ export default class CompagnieProvider{
             console.log('Error getting documents.', err);
         }
     }
+
+            static addCompagnie=async(nom_comp) =>{
+            const options= {
+            method : 'POST',
+            headers :{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({nom_comp})
+            };
+            try{
+                const response= await fetch(`${COMPAGNIE}`, options);
+                const json= await response.json();
+                return json;
+            }catch(err){
+                console.log('Error getting document',err)
+            }
+        }
 }

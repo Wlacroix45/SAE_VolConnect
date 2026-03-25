@@ -1,6 +1,6 @@
 import AeroportProvider from "../../services/AeroportProvider.js";
 
-export default class AeroportAll{
+export default class AeroportAll {
     constructor() {
         this.page_ac = 1;
         this.items_per_page = 10;
@@ -22,6 +22,19 @@ export default class AeroportAll{
         this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
         await this.setPage(1);
     }
+
+    async handleAddAeroport(event) {
+        event.preventDefault();
+        const name = document.getElementById('inputNameAeroport').value.trim();
+        const ville = document.getElementById('inputVilleAeroport').value.trim();
+        const pays = document.getElementById('inputPaysAeroport').value.trim();
+        await AeroportProvider.addAeroport(name, ville, pays);
+        await this.setPage(1);
+    }
+
+
+
+
 
     async render() {
         const rawAeroports = await AeroportProvider.fetchAeroports(this.items_per_page, 1, this.nomCherche);
@@ -65,12 +78,12 @@ export default class AeroportAll{
                     </li>
 
                     ${Array.from({ length: this.total_pages }, (_, i) => i + 1)
-                        .map((page) => `
+                .map((page) => `
                             <li class="page-item ${this.page_ac === page ? "active" : ""}">
                                 <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${page})">${page}</a>
                             </li>
                         `)
-                        .join("\n")}
+                .join("\n")}
 
                     <li class="page-item ${this.page_ac === this.total_pages ? "disabled" : ""}">
                         <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${this.page_ac + 1})" aria-label="Next">
@@ -79,6 +92,21 @@ export default class AeroportAll{
                     </li>
                 </ul>
             </nav>
+            <form>
+                <div class="mb-3">
+                    <label for="inputNameAeroport" class="form-label">Nom de l'aéroport</label>
+                    <input type="text" class="form-control" id="inputNameAeroport">
+                </div>
+                <div class="mb-3">
+                    <label for="inputVilleAeroport" class="form-label">Ville de l'aéroport</label>
+                    <input type="text" class="form-control" id="inputVilleAeroport">
+                </div>
+                 <div class="mb-3">
+                    <label for="inputPaysAeroport" class="form-label">Pays de l'aéroport</label>
+                    <input type="text" class="form-control" id="inputPaysAeroport">
+                </div>
+                <input type="button" onclick="event.preventDefault(); window.currentArticlePage.handleAddAeroport(event)" class="btn btn-primary" value="Ajouter">
+            </form>
         `;
 
         return view;

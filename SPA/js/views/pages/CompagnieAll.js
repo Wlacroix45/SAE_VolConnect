@@ -1,6 +1,6 @@
 import CompagnieProvider from "../../services/CompagnieProvider.js";
 
-export default class CompagnieAll{
+export default class CompagnieAll {
     constructor() {
         this.page_ac = 1;
         this.items_per_page = 10;
@@ -22,6 +22,15 @@ export default class CompagnieAll{
         this.nomCherche = nomRentre ? nomRentre.value.trim() : "";
         await this.setPage(1);
     }
+
+
+    async handleAddCompagnie(event) {
+        event.preventDefault();
+        const nom_compagnie = document.getElementById('inputNameCompagnie').value.trim();
+        await CompagnieProvider.addCompagnie(nom_compagnie);
+        await this.setPage(1);
+    }
+
 
     async render() {
         const rawCompagnies = await CompagnieProvider.fetchCompagnies(this.items_per_page, 1, this.nomCherche);
@@ -65,12 +74,12 @@ export default class CompagnieAll{
                     </li>
 
                     ${Array.from({ length: this.total_pages }, (_, i) => i + 1)
-                        .map((page) => `
+                .map((page) => `
                             <li class="page-item ${this.page_ac === page ? "active" : ""}">
                                 <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${page})">${page}</a>
                             </li>
                         `)
-                        .join("\n")}
+                .join("\n")}
 
                     <li class="page-item ${this.page_ac === this.total_pages ? "disabled" : ""}">
                         <a class="page-link" href="#" onclick="event.preventDefault(); window.currentArticlePage.setPage(${this.page_ac + 1})" aria-label="Next">
@@ -79,6 +88,13 @@ export default class CompagnieAll{
                     </li>
                 </ul>
             </nav>
+            <form>
+                <div class="mb-3">
+                    <label for="inputNameCompagnie" class="form-label">Nom de la compagnie</label>
+                    <input type="text" class="form-control" id="inputNameCompagnie">
+                </div>
+                <input type="button" onclick="event.preventDefault(); window.currentArticlePage.handleAddCompagnie(event)" class="btn btn-primary" value="Ajouter">
+            </form>
         `;
 
         return view;

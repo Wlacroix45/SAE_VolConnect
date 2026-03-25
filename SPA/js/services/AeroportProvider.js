@@ -44,4 +44,23 @@ export default class AeroportProvider{
             console.log('Error getting documents.', err);
         }
     }
+
+        static addAeroport=async(nom_aeroport, ville, pays) =>{
+        const options= {
+        method : 'POST',
+        headers :{
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({nom_aeroport, ville, pays})
+        };
+        try{
+            const response= await fetch(`${AEROPORT}`, options);
+            const json= await response.json();
+            return json;
+        }catch(err){
+            console.log('Error getting document',err)
+        }
+    }
+
+
 }
