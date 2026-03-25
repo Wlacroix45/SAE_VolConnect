@@ -5,14 +5,15 @@ import 'package:flutter/physics.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import '../models/compagnie.dart';
 class MyAPIRest{
-  Future<List<Compagnies>> getvols() async{
+  Future<List<Compagnie>> getCompagnies() async{
     await Future.delayed(Duration(seconds: 1));
     final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/compagnies'));
     final List<dynamic> json = jsonDecode(dataString.body);
-    final todos = <Todo>[];
+    final todos = <Compagnie>[];
     for(var element in json){
-      todos.add(Todo.fromJson(element));
+      todos.add(Compagnie.fromJson(element));
     };
     return todos;
   }
