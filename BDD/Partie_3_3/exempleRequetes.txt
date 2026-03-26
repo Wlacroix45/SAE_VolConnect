@@ -1,9 +1,12 @@
 Question 2 :
 
-Exemple utilisation : 
-
-Toutes les villes connectées depuis Paris:
 ville_connectee(paris, Ville, HDep, HArr)?
+ville_connectee(paris, tokyo, HDep, HArr)?
+ville_connectee(paris, berlin, HDep, HArr)?
 
-Toutes les connexions possibles:
-ville_connectee(VilleDep, VilleArr, HDep, HArr)?
+
+Question 3 : 
+
+ville_connectee_conn_impair(paris, Ville, HDep, HArr)?
+ville_connectee_conn_impair(paris, tokyo, HDep, HArr)?
+ville_connectee_conn_impair(paris, rome, HDep, HArr)?
