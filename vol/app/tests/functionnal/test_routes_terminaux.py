@@ -15,3 +15,17 @@ def test_update_terminal(client, terminal_test):
     response = client.put(f'/api/terminaux/{terminal_test.id_terminal}', json=new_data)
     assert response.status_code == 200
     assert response.json['nom_terminal'] == "Terminal 2"
+
+def test_post_terminal(client, aeroport_test):
+    new_data = {"nom_terminal": "Terminal 3", "id_aeroport": aeroport_test.id_aeroport}
+    response = client.post(f'/api/terminaux', json=new_data)
+    assert response.status_code == 201
+
+def test_terminal_not_found(client):
+    response = client.get('/api/terminaux/9999')
+    assert response.status_code == 404
+
+def test_put_terminal_not_found(client, aeroport_test):
+    new_data = {"nom_terminal": "Terminal 4", "id_aeroport": aeroport_test.id_aeroport}
+    response = client.put('/api/terminaux/9999', json=new_data)
+    assert response.status_code == 404

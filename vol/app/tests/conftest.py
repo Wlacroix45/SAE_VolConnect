@@ -49,49 +49,15 @@ def compagnie_test():
 
 
 @pytest.fixture
-def compagnies_test():
-    """Crée plusieurs compagnies aériennes."""
-    compagnies = []
-    noms = ["Air France", "Lufthansa", "KLM", "Ryanair"]
-    for nom in noms:
-        compagnies.append(create_compagnie(nom))
-    return compagnies
-
-
-@pytest.fixture
 def aeroport_test():
     """Crée un aéroport."""
     return create_aeroport("Charles de Gaulle", "Paris", "France")
 
 
 @pytest.fixture
-def aeroports_test():
-    """Crée plusieurs aéroports."""
-    aeroports = []
-    data = [
-        ("Charles de Gaulle", "Paris", "France"),
-        ("Orly", "Paris", "France"),
-        ("Frankfurt", "Frankfurt", "Germany"),
-        ("Amsterdam Airport", "Amsterdam", "Netherlands")
-    ]
-    for nom, ville, pays in data:
-        aeroports.append(create_aeroport(nom, ville, pays))
-    return aeroports
-
-
-@pytest.fixture
 def terminal_test(aeroport_test):
     """Crée un terminal."""
     return create_terminal("Terminal 1", aeroport_test.id_aeroport)
-
-
-@pytest.fixture
-def terminals_test(aeroport_test):
-    """Crée plusieurs terminaux."""
-    terminals = []
-    for i in range(1, 4):
-        terminals.append(create_terminal(f"Terminal {i}", aeroport_test.id_aeroport))
-    return terminals
 
 
 @pytest.fixture
@@ -105,28 +71,6 @@ def vol_test(compagnie_test, terminal_test):
         date_heure_depart=datetime(2026, 4, 1, 10, 0, 0),
         date_heure_arrivee=datetime(2026, 4, 1, 12, 0, 0)
     )
-
-
-@pytest.fixture
-def vols_test(compagnie_test, terminals_test):
-    """Crée plusieurs vols de test."""
-    vols = []
-    vols_data = [
-        ("AF101", datetime(2026, 4, 1, 10, 0, 0), datetime(2026, 4, 1, 12, 0, 0)),
-        ("AF102", datetime(2026, 4, 1, 14, 0, 0), datetime(2026, 4, 1, 16, 0, 0)),
-        ("AF103", datetime(2026, 4, 2, 9, 0, 0), datetime(2026, 4, 2, 11, 0, 0))
-    ]
-    
-    for nom_vol, dep, arr in vols_data:
-        vols.append(create_vol(
-            nom_vol=nom_vol,
-            id_compagnie=compagnie_test.id_compagnie,
-            id_terminal_depart=terminals_test[0].id_terminal,
-            id_terminal_arrivee=terminals_test[1].id_terminal,
-            date_heure_depart=dep,
-            date_heure_arrivee=arr
-        ))
-    return vols
 
 
 @pytest.fixture

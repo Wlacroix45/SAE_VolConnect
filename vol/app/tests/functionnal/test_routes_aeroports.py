@@ -20,3 +20,17 @@ def test_update_aeroport(client, aeroport_test):
 def test_get_terminaux_by_aeroport(client, aeroport_test):
     response = client.get(f'/api/aeroports/{aeroport_test.id_aeroport}/terminaux')
     assert response.status_code == 200
+
+def test_post_aeroport(client):
+    new_data = {"nom_aeroport": "Orly", "ville": "Paris", "pays": "France"}
+    response = client.post(f'/api/aeroports', json=new_data)
+    assert response.status_code == 201
+
+def test_aeroport_not_found(client):
+    response = client.get('/api/aeroports/9999')
+    assert response.status_code == 404
+
+def test_put_aeroport_not_found(client):
+    new_data = {"nom_aeroport": "Orly", "ville": "Paris", "pays": "France"}
+    response = client.put('/api/aeroports/9999', json=new_data)
+    assert response.status_code == 404
