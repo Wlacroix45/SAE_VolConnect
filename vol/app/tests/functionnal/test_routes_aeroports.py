@@ -16,3 +16,7 @@ def test_update_aeroport(client, aeroport_test):
     assert response.status_code == 200
     assert response.json['nom_aeroport'] == "Pierre de Gaulle"
     assert response.json['pays'] == "France"
+
+def test_get_terminaux_by_aeroport(client, aeroport_test):
+    response = client.get(f'/api/aeroports/{aeroport_test.id_aeroport}/terminaux')
+    assert response.status_code == 200

@@ -15,3 +15,7 @@ def test_update_compagnie(client, compagnie_test):
     response = client.put(f'/api/compagnies/{compagnie_test.id_compagnie}', json=new_data)
     assert response.status_code == 200
     assert response.json['nom_comp'] == "Air France nouveau"
+
+def test_get_vols_by_compagnie(client, compagnie_test):
+    response = client.get(f'/api/compagnies/{compagnie_test.id_compagnie}/vols')
+    assert response.status_code == 200
