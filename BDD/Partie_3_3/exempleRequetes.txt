@@ -1,0 +1,9 @@
+Question 2 :
+
+Exemple utilisation : 
+
+Toutes les villes connectées depuis Paris:
+ville_connectee(paris, Ville, HDep, HArr)?
+
+Toutes les connexions possibles:
+ville_connectee(VilleDep, VilleArr, HDep, HArr)?
