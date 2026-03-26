@@ -3,26 +3,41 @@ from flask import Flask
 from app.extensions import api, db
 from app.views import ns
 from app.models import *
+from app.api_models import *
 from datetime import datetime
-
+from pathlib import Path
 
 @pytest.fixture
 def app():
-    """Création et configuration d'une nouvelle instance d'application pour chaque test."""
+    """Crée une instance de l'application Flask pour les tests."""
     app = Flask(__name__)
-    
-    # Configuration de test
+    instance_dir = Path(__file__).resolve().parents[2] / "instance"
+    instance_dir.mkdir(parents=True, exist_ok=True)
+    db_path = instance_dir / "dbtest.sqlite3"
     app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["WTF_CSRF_ENABLED"] = False
-    
-    # Initialisation des extensions
     api.init_app(app)
     db.init_app(app)
-    api.add_namespace(ns)
-    
-    # Création des tables dans le contexte de l'application
+    if not any(name.startswith("api_compagnie_item") for name in app.view_functions):
+        api.add_namespace(ns)
+    if not any(name.startswith("api_aeroport_item") for name in app.view_functions):
+        api.add_namespace(ns)
+    if not any(name.startswith("api_terminal_item") for name in app.view_functions):
+        api.add_namespace(ns)
+    if not any(name.startswith("api_vol_item") for name in app.view_functions):
+        api.add_namespace(ns)
+    def get_uri(base_name):
+        """Permer de trouver l'URI correspondant à un nom de ressource donné."""
+        for name in app.view_functions:
+            if name == base_name or name.startswith(base_name + "_"):
+                return name
+        return base_name
+    compagnie_model["uri"].endpoint = get_uri("api_compagnie_item")
+    aeroport_model["uri"].endpoint = get_uri("api_aeroport_item")
+    terminal_model["uri"].endpoint = get_uri("api_terminal_item")
+    vol_model["uri"].endpoint = get_uri("api_vol_item")
     with app.app_context():
         db.create_all()
         yield app
@@ -113,13 +128,13 @@ def vol_test(compagnie_test, terminal_test):
 def vols_test(compagnie_test, terminals_test):
     """Crée plusieurs vols de test."""
     vols = []
-    flights_data = [
+    vols_data = [
         ("AF101", datetime(2026, 4, 1, 10, 0, 0), datetime(2026, 4, 1, 12, 0, 0)),
         ("AF102", datetime(2026, 4, 1, 14, 0, 0), datetime(2026, 4, 1, 16, 0, 0)),
         ("AF103", datetime(2026, 4, 2, 9, 0, 0), datetime(2026, 4, 2, 11, 0, 0))
     ]
     
-    for nom_vol, dep, arr in flights_data:
+    for nom_vol, dep, arr in vols_data:
         vols.append(create_vol(
             nom_vol=nom_vol,
             id_compagnie=compagnie_test.id_compagnie,
