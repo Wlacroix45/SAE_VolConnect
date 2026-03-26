@@ -6,7 +6,7 @@ def test_get_compagnies(client):
     response = client.get(f'/api/compagnies')
     assert response.status_code == 200
 
-def test_delete_compagnies(client, compagnie_test):
+def test_delete_compagnie(client, compagnie_test):
     response = client.delete(f'/api/compagnies/{compagnie_test.id_compagnie}')
     assert response.status_code == 204
 
