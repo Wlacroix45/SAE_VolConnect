@@ -1,9 +1,9 @@
 import pytest
 from flask import Flask
-from app.extensions import api, db
+from flask_restx import Api
+from app.extensions import db
 from app.views import ns
 from app.models import *
-from app.api_models import *
 from datetime import datetime
 from pathlib import Path
 
@@ -18,26 +18,9 @@ def app():
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["WTF_CSRF_ENABLED"] = False
-    api.init_app(app)
     db.init_app(app)
-    if not any(name.startswith("api_compagnie_item") for name in app.view_functions):
-        api.add_namespace(ns)
-    if not any(name.startswith("api_aeroport_item") for name in app.view_functions):
-        api.add_namespace(ns)
-    if not any(name.startswith("api_terminal_item") for name in app.view_functions):
-        api.add_namespace(ns)
-    if not any(name.startswith("api_vol_item") for name in app.view_functions):
-        api.add_namespace(ns)
-    def get_uri(base_name):
-        """Permer de trouver l'URI correspondant à un nom de ressource donné."""
-        for name in app.view_functions:
-            if name == base_name or name.startswith(base_name + "_"):
-                return name
-        return base_name
-    compagnie_model["uri"].endpoint = get_uri("api_compagnie_item")
-    aeroport_model["uri"].endpoint = get_uri("api_aeroport_item")
-    terminal_model["uri"].endpoint = get_uri("api_terminal_item")
-    vol_model["uri"].endpoint = get_uri("api_vol_item")
+    test_api = Api(app)
+    test_api.add_namespace(ns)
     with app.app_context():
         db.create_all()
         yield app
@@ -150,9 +133,6 @@ def vols_test(compagnie_test, terminals_test):
 def localiser_test(compagnie_test, aeroport_test):
     """Crée une localisation (la compagnie opère à l'aéroport)."""
     return create_localiser(aeroport_test.id_aeroport, compagnie_test.id_compagnie)
-
-
-# ==================== UTILITY FIXTURES ====================
 
 @pytest.fixture
 def clean_db(app):
