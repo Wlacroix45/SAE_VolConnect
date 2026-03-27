@@ -1,49 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:volconnect/API/apiRest.dart';
 import '../models/compagnie.dart';
+import 'compagnieDetailView.dart';
 
-class Compagniesview extends StatelessWidget{
+class Compagniesview extends StatelessWidget {
   Compagniesview({super.key});
 
   @override
   Widget build(BuildContext context) {
     Future<List<Compagnie>> compagnie = APIRest().getCompagnies();
 
-    return FutureBuilder <List<Compagnie>>(
+    return FutureBuilder<List<Compagnie>>(
         future: compagnie,
         builder: (BuildContext context, AsyncSnapshot<List<Compagnie>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              itemBuilder : (BuildContext context ,int index) {
+              itemCount: snapshot.data?.length ?? 0,
+              itemBuilder: (BuildContext context, int index) {
+                final item = snapshot.data![index];
                 return Card(
-                  color: Colors.black,
-                  elevation: 7,
-                  margin: const EdgeInsets.all(10),
-                  child:ListTile(
-                    leading: CircleAvatar(backgroundColor: Colors.purple, child:Text(snapshot.data?[index].id_compagnie.toString()??""),),
-                    title: Text(snapshot.data?[index].nom_comp??""),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () {
-                      },
+                  color: Colors.grey[200],
+                  elevation: 4,
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.purple,
+                      child: Text(item.id_compagnie.toString()),
                     ),
+                    title: Text(item.nom_comp),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CompagnieDetailView(compagnie: item),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
-
             );
-          }
-          else if (snapshot.hasError) {
+          } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return const Center(child: CircularProgressIndicator());
           }
-          else {
-            return Center(child: CircularProgressIndicator());
-
-          }
-          return Container();
-        }
-    );
-
-
+        });
   }
 }

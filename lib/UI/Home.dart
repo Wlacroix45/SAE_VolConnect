@@ -3,25 +3,25 @@ import './aeroportsView.dart';
 import './compagniesView.dart';
 import './volsView.dart';
 
-void main() => runApp(const BottomNavigationBarExampleApp());
+void main() => runApp(const BottomNavigationBarVolApp());
 
-class BottomNavigationBarExampleApp extends StatelessWidget {
+class BottomNavigationBarVolApp extends StatelessWidget {
 
-  const BottomNavigationBarExampleApp({super.key});
+  const BottomNavigationBarVolApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const BottomNavigationBarExample();
+    return const BottomNavigationBarVol();
   }
 }
-class BottomNavigationBarExample extends StatefulWidget {
-  const BottomNavigationBarExample({super.key});
+class BottomNavigationBarVol extends StatefulWidget {
+  const BottomNavigationBarVol({super.key});
 
   @override
-  State<BottomNavigationBarExample> createState() => _BottomNavigationBarExampleState();
+  State<BottomNavigationBarVol> createState() => _BottomNavigationBarVolState();
 }
 
-class _BottomNavigationBarExampleState extends State<BottomNavigationBarExample> {
+class _BottomNavigationBarVolState extends State<BottomNavigationBarVol> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
@@ -43,10 +43,9 @@ class _BottomNavigationBarExampleState extends State<BottomNavigationBarExample>
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Wabeille'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Foucher'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Florence'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'aeroports'),
+          BottomNavigationBarItem(icon: Icon(Icons.business), label: 'compagnies'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'vols'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

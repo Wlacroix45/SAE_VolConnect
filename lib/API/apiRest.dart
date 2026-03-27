@@ -11,18 +11,17 @@ import '../models/compagnie.dart';
 import '../models/vol.dart';
 class APIRest{
   Future<List<Compagnie>> getCompagnies() async{
-    await Future.delayed(Duration(seconds: 1));
-    final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/compagnies'));
+    final dataString = await http.get(Uri.parse('http://localhost:5000/api/compagnies'));
     final List<dynamic> json = jsonDecode(dataString.body);
-    final todos = <Compagnie>[];
+    final compagnies = <Compagnie>[];
+
     for(var element in json){
-      todos.add(Compagnie.fromJson(element));
+      compagnies.add(Compagnie.fromJson(element));
     };
-    return todos;
+    return compagnies;
   }
   Future<List<Vol>> getVols() async{
-    await Future.delayed(Duration(seconds: 1));
-    final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/vols'));
+    final dataString = await http.get(Uri.parse('http://localhost:5000/api/vols'));
     final List<dynamic> json = jsonDecode(dataString.body);
     final todos = <Vol>[];
     for(var element in json){
@@ -31,8 +30,7 @@ class APIRest{
     return todos;
   }
   Future<List<Terminal>> getTerminaux() async{
-    await Future.delayed(Duration(seconds: 1));
-    final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/terminaux'));
+    final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/api/terminaux'));
     final List<dynamic> json = jsonDecode(dataString.body);
     final todos = <Terminal>[];
     for(var element in json){
@@ -41,8 +39,7 @@ class APIRest{
     return todos;
   }
   Future<List<Aeroport>> getAeroports() async{
-    await Future.delayed(Duration(seconds: 1));
-    final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/aeroports'));
+    final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/api/aeroports'));
     final List<dynamic> json = jsonDecode(dataString.body);
     final todos = <Aeroport>[];
     for(var element in json){

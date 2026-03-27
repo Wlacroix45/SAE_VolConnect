@@ -8,7 +8,8 @@ class Aeroport {
   String nom_aeroport;
   String ville ;
   String pays ;
-  Aeroport({required this.id_aeroport,required this.nom_aeroport,required this.ville, required this.pays});
+  String uri;
+  Aeroport({required this.id_aeroport,required this.nom_aeroport,required this.ville, required this.pays, required this.uri});
 
   static Aeroport fromJson(Map<String,dynamic >json) {
     final tags = <String>[];
@@ -17,6 +18,7 @@ class Aeroport {
       nom_aeroport: json['nom_aeroport'],
       ville: json['ville'],
       pays: json['pays'],
+      uri: json['uri']
     );
   }
 }
