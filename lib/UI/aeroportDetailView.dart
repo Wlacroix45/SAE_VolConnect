@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/aeroport.dart';
-
+import 'package:volconnect/models/aeroport.dart';
 class AeroportDetailView extends StatelessWidget {
   final Aeroport aeroport;
 

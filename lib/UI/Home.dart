@@ -51,11 +51,6 @@ class _BottomNavigationBarVolState extends State<BottomNavigationBarVol> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-      floatingActionButton: _selectedIndex==0?FloatingActionButton(
-        onPressed: (){
-        },
-        child: const Icon(Icons.add),
-      ):const SizedBox.shrink(),
     );
   }
 }
