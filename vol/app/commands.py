@@ -5,6 +5,7 @@ from datetime import datetime
 
 @app.cli.command()
 def syncdb():
+    """Synchronise la base de données avec les modèles et insère les jeux de données."""
     db.create_all()
     db.session.query(Compagnie).delete()
     db.session.query(Aeroport).delete()
