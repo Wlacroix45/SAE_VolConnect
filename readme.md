@@ -13,9 +13,9 @@ Contrôleur de qualité : GUERRIER Titouan
 - Vous devez avoir installé python 
 - Vous devez pouvoir lancer un serveur local (Ex: php)
 
-## Lancement Serveur
+## Lancement Serveur API
 
-Avant de vouloir lancer la SPA ou l'application mobile, vous devez lancer le serveur web.
+Avant de vouloir lancer la SPA ou l'application mobile, vous devez lancer le serveur de l'API.
 Tout d'abord, vous devez créer un environnement virtuel et installer toutes les dépendances. Pour ce faire, mettez vous à la racine du projet (SAE_VolConnect/) et tapez les commandes suivantes :
 - virtualenv -p python3 venv
 - source venv/bin/activate
