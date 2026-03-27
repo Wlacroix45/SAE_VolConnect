@@ -7,6 +7,7 @@ class Compagnie {
   String nom_comp;
   String uri;
   Compagnie({required this.id_compagnie,required this.nom_comp, required this.uri});
+  //construit un Compagnie depuis le json
   static Compagnie fromJson(Map<String,dynamic >json) {
     final tags = <String>[];
     return Compagnie(

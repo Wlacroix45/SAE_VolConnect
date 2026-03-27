@@ -10,7 +10,7 @@ class Aeroport {
   String pays ;
   String uri;
   Aeroport({required this.id_aeroport,required this.nom_aeroport,required this.ville, required this.pays, required this.uri});
-
+  //construit un Aeroport depuis le json
   static Aeroport fromJson(Map<String,dynamic >json) {
     final tags = <String>[];
     return Aeroport(

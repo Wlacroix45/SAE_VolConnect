@@ -9,6 +9,7 @@ class Terminal {
   int id_aeroport ;
   String uri;
   Terminal({required this.id_terminal,required this.nom_terminal,required this.id_aeroport, required this.uri});
+  //construit un Terminal depuis le json
   static Terminal fromJson(Map<String,dynamic >json) {
     final tags = <String>[];
     return Terminal(

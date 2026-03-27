@@ -12,7 +12,7 @@ class Vol {
   String uri;
   Vol({required this.id_vol,required this.id_compagnie,required this.id_terminal_depart,required
   this.id_terminal_arrive,required this.date_depart,required this.date_arrivee, required this.nom_Vol, required this.uri});
-
+  //construit un Vol depuis le json
   static Vol fromJson(Map<String,dynamic >json) {
     final tags = <String>[];
     return Vol(

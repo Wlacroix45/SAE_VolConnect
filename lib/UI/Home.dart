@@ -39,7 +39,7 @@ class _BottomNavigationBarVolState extends State<BottomNavigationBarVol> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Flutter TD2', style: Theme.of(context).appBarTheme.titleTextStyle)),  // A modifier ici , style : Theme.of(context).appBarTheme.titleTextStyle
+      appBar: AppBar(title: Text('SAE vol connect', style: Theme.of(context).appBarTheme.titleTextStyle)),  // A modifier ici , style : Theme.of(context).appBarTheme.titleTextStyle
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

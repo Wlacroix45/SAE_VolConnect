@@ -10,6 +10,7 @@ import 'package:volconnect/models/terminal.dart';
 import '../models/compagnie.dart';
 import '../models/vol.dart';
 class APIRest{
+  //récupère les données de l'API pour les compagnies
   Future<List<Compagnie>> getCompagnies() async{
     final dataString = await http.get(Uri.parse('http://localhost:5000/api/compagnies'));
     final List<dynamic> json = jsonDecode(dataString.body);
@@ -20,6 +21,7 @@ class APIRest{
     };
     return compagnies;
   }
+  //récupère les données de l'API pour les vols
   Future<List<Vol>> getVols() async{
     final dataString = await http.get(Uri.parse('http://localhost:5000/api/vols'));
     final List<dynamic> json = jsonDecode(dataString.body);
@@ -29,6 +31,7 @@ class APIRest{
     };
     return todos;
   }
+  //récupère les données de l'API pour les terminaux
   Future<List<Terminal>> getTerminaux() async{
     final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/api/terminaux'));
     final List<dynamic> json = jsonDecode(dataString.body);
@@ -38,6 +41,7 @@ class APIRest{
     };
     return todos;
   }
+  //récupère les données de l'API pour les aeroports
   Future<List<Aeroport>> getAeroports() async{
     final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/api/aeroports'));
     final List<dynamic> json = jsonDecode(dataString.body);
@@ -47,6 +51,7 @@ class APIRest{
     };
     return todos;
   }
+
   Future<String> _loadAsset(String path) async {
     return rootBundle.loadString(path);
   }

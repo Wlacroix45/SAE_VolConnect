@@ -9,7 +9,7 @@ class VolConnect extends StatelessWidget{
   @override
   Widget build(BuildContext context){
           return MaterialApp(
-              title: 'TD2',
+              title: 'SAE_volConnect',
               home: BottomNavigationBarVolApp()
           );
   }
