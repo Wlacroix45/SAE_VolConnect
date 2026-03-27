@@ -9,7 +9,7 @@ import 'package:volconnect/models/aeroport.dart';
 import 'package:volconnect/models/terminal.dart';
 import '../models/compagnie.dart';
 import '../models/vol.dart';
-class MyAPIRest{
+class APIRest{
   Future<List<Compagnie>> getCompagnies() async{
     await Future.delayed(Duration(seconds: 1));
     final dataString = await http.get(Uri.parse('http://127.0.0.1:5000/compagnies'));

@@ -6,8 +6,8 @@ class Vol {
   int id_compagnie;
   int id_terminal_depart;
   int id_terminal_arrive;
-  DateTime date_depart;
-  DateTime date_arrivee;
+  String date_depart;
+  String date_arrivee;
   String nom_Vol;
   Vol({required this.id_vol,required this.id_compagnie,required this.id_terminal_depart,required
   this.id_terminal_arrive,required this.date_depart,required this.date_arrivee, required this.nom_Vol});
