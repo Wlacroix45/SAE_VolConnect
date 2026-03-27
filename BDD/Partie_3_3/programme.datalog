@@ -1,3 +1,4 @@
+% Faits de base: vols, équipages, indices de qualité
 vol(af123, paris_madrid, 1, 2, airfrance, t1, t2, paris, madrid, france, espagne).
 equipage(af123, dupont, pilote).
 equipage(af123, martin, steward).
@@ -143,7 +144,6 @@ indice_qualite(v017, prix, 3, 3).
 %Question 2.
 
 % Ordre temporel generique base sur le successeur.
-% Ajouter succ(N,N+1) quand de nouvelles valeurs d'heures apparaissent.
 succ(1,2).
 succ(2,3).
 succ(3,4).
@@ -234,7 +234,6 @@ trajet_pair_conn(VilleDep, VilleArr, HDep, HArr) :-
   HArr = HArr2,
   VilleDep != VilleArr.
 
-% Résultat demandé: nombre impair de connexions
 ville_connectee_conn_impair(VilleDep, VilleArr, HDep, HArr) :-
   trajet_impair_conn(VilleDep, VilleArr, HDep, HArr),
   VilleDep != VilleArr.
