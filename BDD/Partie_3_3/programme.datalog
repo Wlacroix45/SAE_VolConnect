@@ -2,9 +2,9 @@
 vol(af123, paris_madrid, 1, 2, airfrance, t1, t2, paris, madrid, france, espagne).
 equipage(af123, dupont, pilote).
 equipage(af123, martin, steward).
-indice_qualite(af123, ponctualite, 45, 5).
-indice_qualite(af123, confort, 38, 3).
-indice_qualite(af123, service, 42, 2).
+indice_qualite(af123, carbone, 2, 5).
+indice_qualite(af123, securite, 4, 3).
+indice_qualite(af123, prix, 2, 2).
 
 vol(v001, vol_paris_londres, 3, 4, airfrance, terminal_2, terminal_5, paris, london, france, uk).
 equipage(v001, dupont, pilote).
