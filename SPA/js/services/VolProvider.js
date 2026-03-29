@@ -43,4 +43,71 @@ export default class VolProvider{
             console.log('Error getting documents.', err);
         }
     }
+
+    static addVol = async (nom_vol, id_compagnie, id_terminal_depart, id_terminal_arrivee, date_heure_depart, date_heure_arrivee) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nom_vol,
+                id_compagnie: Number(id_compagnie),
+                id_terminal_depart: Number(id_terminal_depart),
+                id_terminal_arrivee: Number(id_terminal_arrivee),
+                date_heure_depart,
+                date_heure_arrivee,
+            })
+        };
+
+        try {
+            const response = await fetch(`${VOL}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log('Error creating document', err);
+        }
+    }
+
+    static updateVol = async (id, nom_vol, id_compagnie, id_terminal_depart, id_terminal_arrivee, date_heure_depart, date_heure_arrivee) => {
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nom_vol,
+                id_compagnie: Number(id_compagnie),
+                id_terminal_depart: Number(id_terminal_depart),
+                id_terminal_arrivee: Number(id_terminal_arrivee),
+                date_heure_depart,
+                date_heure_arrivee,
+            })
+        };
+
+        try {
+            const response = await fetch(`${VOL}/${id}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log('Error updating document', err);
+        }
+    }
+
+    static deleteVol = async (id) => {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const response = await fetch(`${VOL}/${id}`, options);
+            return response.ok;
+        } catch (err) {
+            console.log('Error deleting document', err);
+            return false;
+        }
+    }
 }

@@ -43,4 +43,57 @@ export default class TerminalProvider{
             console.log('Error getting documents.', err);
         }
     }
+
+    static addTerminal = async (nom_terminal, id_aeroport) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nom_terminal, id_aeroport: Number(id_aeroport) }),
+        };
+
+        try {
+            const response = await fetch(`${TERMINAL}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log('Error creating document', err);
+        }
+    }
+
+    static updateTerminal = async (id, nom_terminal, id_aeroport) => {
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nom_terminal, id_aeroport: Number(id_aeroport) }),
+        };
+
+        try {
+            const response = await fetch(`${TERMINAL}/${id}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log('Error updating document', err);
+        }
+    }
+
+    static deleteTerminal = async (id) => {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const response = await fetch(`${TERMINAL}/${id}`, options);
+            return response.ok;
+        } catch (err) {
+            console.log('Error deleting document', err);
+            return false;
+        }
+    }
 }

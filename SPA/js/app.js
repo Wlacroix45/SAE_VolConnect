@@ -30,9 +30,7 @@ const router = async()=>{
     let parsedUrl = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
     console.log(parsedUrl);
     let page= routes[parsedUrl] ? new routes[parsedUrl] : new Error404;
-    if (page instanceof AeroportAll || page instanceof TerminalAll || page instanceof CompagnieAll || page instanceof VolAll){
-        window.currentArticlePage = page;
-    }
+    window.currentArticlePage = page;
     content.innerHTML = await page.render();
     
 }

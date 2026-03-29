@@ -45,20 +45,55 @@ export default class CompagnieProvider{
         }
     }
 
-            static addCompagnie=async(nom_comp) =>{
-            const options= {
+    static addCompagnie = async (nom_comp) =>{
+        const options= {
             method : 'POST',
             headers :{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({nom_comp})
-            };
-            try{
-                const response= await fetch(`${COMPAGNIE}`, options);
-                const json= await response.json();
-                return json;
-            }catch(err){
-                console.log('Error getting document',err)
-            }
+        };
+        try{
+            const response= await fetch(`${COMPAGNIE}`, options);
+            const json= await response.json();
+            return json;
+        }catch(err){
+            console.log('Error getting document',err)
         }
+    }
+
+    static updateCompagnie = async (id, nom_comp) => {
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nom_comp }),
+        };
+
+        try {
+            const response = await fetch(`${COMPAGNIE}/${id}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log('Error updating document', err);
+        }
+    }
+
+    static deleteCompagnie = async (id) => {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const response = await fetch(`${COMPAGNIE}/${id}`, options);
+            return response.ok;
+        } catch (err) {
+            console.log('Error deleting document', err);
+            return false;
+        }
+    }
 }
