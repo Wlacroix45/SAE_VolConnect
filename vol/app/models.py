@@ -93,10 +93,20 @@ def get_all_localiser():
 
 def create_localiser(id_aeroport, id_compagnie):
     """Crée une nouvelle localisation."""
+    existing = Localiser.query.get((id_aeroport, id_compagnie))
+    if existing is not None:
+        return existing
     localiser = Localiser(id_aeroport=id_aeroport, id_compagnie=id_compagnie)
     db.session.add(localiser)
     db.session.commit()
     return localiser
+
+def delete_localiser(id_aeroport, id_compagnie):
+    """Supprimme une localisation."""
+    localiser = Localiser.query.get((id_aeroport, id_compagnie))
+    if localiser:
+        db.session.delete(localiser)
+        db.session.commit()
 
 def get_all_terminaux():
     """Récupère tous les terminaux."""

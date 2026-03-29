@@ -44,4 +44,58 @@ export default class AeroportProvider{
             console.log('Error getting documents.', err);
         }
     }
+
+    static addAeroport=async(nom_aeroport, ville, pays) =>{
+        const options= {
+        method : 'POST',
+        headers :{
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({nom_aeroport, ville, pays})
+        };
+        try{
+            const response= await fetch(`${AEROPORT}`, options);
+            const json= await response.json();
+            return json;
+        }catch(err){
+            console.log('Error getting document',err)
+        }
+    }
+
+    static updateAeroport = async (id, nom_aeroport, ville, pays) => {
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nom_aeroport, ville, pays }),
+        };
+
+        try {
+            const response = await fetch(`${AEROPORT}/${id}`, options);
+            const json = await response.json();
+            return json;
+        } catch (err) {
+            console.log('Error updating document', err);
+        }
+    }
+
+    static deleteAeroport = async (id) => {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const response = await fetch(`${AEROPORT}/${id}`, options);
+            return response.ok;
+        } catch (err) {
+            console.log('Error deleting document', err);
+            return false;
+        }
+    }
+
+
 }

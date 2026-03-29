@@ -1,4 +1,6 @@
 import VolProvider from "../../services/VolProvider.js";
+import CompagnieProvider from "../../services/CompagnieProvider.js";
+import TerminalProvider from "../../services/TerminalProvider.js";
 
 export default class VolAll{
     constructor() {
@@ -23,6 +25,30 @@ export default class VolAll{
         await this.setPage(1);
     }
 
+    async handleAddVol(event) {
+        event.preventDefault();
+        const nom_vol = document.getElementById('inputNameVol')?.value?.trim() ?? "";
+        const id_compagnie = document.getElementById('selectCompagnieVol')?.value;
+        const id_terminal_depart = document.getElementById('selectTerminalDepartVol')?.value;
+        const id_terminal_arrivee = document.getElementById('selectTerminalArriveeVol')?.value;
+        const date_heure_depart = document.getElementById('inputDateDepartVol')?.value;
+        const date_heure_arrivee = document.getElementById('inputDateArriveeVol')?.value;
+
+        if (!nom_vol || !id_compagnie || !id_terminal_depart || !id_terminal_arrivee || !date_heure_depart || !date_heure_arrivee) {
+            return;
+        }
+
+        await VolProvider.addVol(
+            nom_vol,
+            Number(id_compagnie),
+            Number(id_terminal_depart),
+            Number(id_terminal_arrivee),
+            date_heure_depart,
+            date_heure_arrivee,
+        );
+        await this.setPage(1);
+    }
+
     async render() {
         const rawVols = await VolProvider.fetchVols(this.items_per_page, 1, this.nomCherche);
         const allVols = Array.isArray(rawVols)
@@ -32,6 +58,17 @@ export default class VolAll{
         this.page_ac = Math.min(Math.max(1, this.page_ac), this.total_pages);
         const start = (this.page_ac - 1) * this.items_per_page;
         const vols = allVols.slice(start, start + this.items_per_page);
+
+        const rawCompagnies = await CompagnieProvider.fetchCompagnies(1000, 1, "");
+        const compagniesForSelect = Array.isArray(rawCompagnies)
+            ? rawCompagnies
+            : (Array.isArray(rawCompagnies.items) ? rawCompagnies.items : []);
+
+        const rawTerminaux = await TerminalProvider.fetchTerminaux(2000, 1, "");
+        const terminauxForSelect = Array.isArray(rawTerminaux)
+            ? rawTerminaux
+            : (Array.isArray(rawTerminaux.items) ? rawTerminaux.items : []);
+
         let view = `
             <h2 style="text-align: center;">Tous les vols</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
@@ -79,6 +116,46 @@ export default class VolAll{
                     </li>
                 </ul>
             </nav>
+
+            <form>
+                <div class="mb-3">
+                    <label for="inputNameVol" class="form-label">Nom du vol</label>
+                    <input type="text" class="form-control" id="inputNameVol">
+                </div>
+                <div class="mb-3">
+                    <label for="selectCompagnieVol" class="form-label">Compagnie</label>
+                    <select class="form-control" id="selectCompagnieVol">
+                        ${compagniesForSelect.map((c) => `
+                            <option value="${c.id_compagnie}">${c.nom_comp}</option>
+                        `).join("\n")}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="selectTerminalDepartVol" class="form-label">Terminal de départ</label>
+                    <select class="form-control" id="selectTerminalDepartVol">
+                        ${terminauxForSelect.map((t) => `
+                            <option value="${t.id_terminal}">${t.nom_terminal}</option>
+                        `).join("\n")}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="selectTerminalArriveeVol" class="form-label">Terminal d'arrivée</label>
+                    <select class="form-control" id="selectTerminalArriveeVol">
+                        ${terminauxForSelect.map((t) => `
+                            <option value="${t.id_terminal}">${t.nom_terminal}</option>
+                        `).join("\n")}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="inputDateDepartVol" class="form-label">Date/heure départ</label>
+                    <input type="datetime-local" lang="fr-FR" class="form-control" id="inputDateDepartVol" step="60">
+                </div>
+                <div class="mb-3">
+                    <label for="inputDateArriveeVol" class="form-label">Date/heure arrivée</label>
+                    <input type="datetime-local" lang="fr-FR" class="form-control" id="inputDateArriveeVol" step="60">
+                </div>
+                <input type="button" onclick="event.preventDefault(); window.currentArticlePage.handleAddVol(event)" class="btn btn-primary" value="Ajouter">
+            </form>
         `;
 
         return view;

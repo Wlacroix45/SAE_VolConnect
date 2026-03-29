@@ -23,6 +23,15 @@ export default class TerminalAll{
         await this.setPage(1);
     }
 
+    async handleAddTerminal(event) {
+        event.preventDefault();
+        const nom_terminal = document.getElementById('inputNameTerminal')?.value?.trim() ?? "";
+        const id_aeroport = document.getElementById('selectAeroportTerminal')?.value;
+        if (!nom_terminal || !id_aeroport) return;
+        await TerminalProvider.addTerminal(nom_terminal, Number(id_aeroport));
+        await this.setPage(1);
+    }
+
     async render() {
         const rawTerminaux = await TerminalProvider.fetchTerminaux(this.items_per_page, 1, this.nomCherche);
         const allTerminaux = Array.isArray(rawTerminaux)
@@ -33,6 +42,12 @@ export default class TerminalAll{
         const start = (this.page_ac - 1) * this.items_per_page;
         const terminaux = allTerminaux.slice(start, start + this.items_per_page);
         const aeroportCache = new Map();
+
+        const rawAeroports = await AeroportProvider.fetchAeroports(1000, 1, "");
+        const aeroportsForSelect = Array.isArray(rawAeroports)
+            ? rawAeroports
+            : (Array.isArray(rawAeroports.items) ? rawAeroports.items : []);
+
         let view = `
             <h2 style="text-align: center;">Tous les terminaux</h2>
             <form class="d-flex" role="search" onsubmit="window.currentArticlePage.submitFilter(event)">
@@ -92,6 +107,22 @@ export default class TerminalAll{
                     </li>
                 </ul>
             </nav>
+
+            <form>
+                <div class="mb-3">
+                    <label for="inputNameTerminal" class="form-label">Nom du terminal</label>
+                    <input type="text" class="form-control" id="inputNameTerminal">
+                </div>
+                <div class="mb-3">
+                    <label for="selectAeroportTerminal" class="form-label">Aéroport</label>
+                    <select class="form-control" id="selectAeroportTerminal">
+                        ${aeroportsForSelect.map((a) => `
+                            <option value="${a.id_aeroport}">${a.nom_aeroport}</option>
+                        `).join("\n")}
+                    </select>
+                </div>
+                <input type="button" onclick="event.preventDefault(); window.currentArticlePage.handleAddTerminal(event)" class="btn btn-primary" value="Ajouter">
+            </form>
         `;
 
         return view;
