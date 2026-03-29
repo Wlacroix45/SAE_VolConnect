@@ -30,7 +30,7 @@ Enfin, vous pouvez lancer le serveur avec la commande suivante :
 ## Lancement SPA
 
 Une fois le serveur lancé, vous pourrez alors lancer la SPA. Pour cela dirigez vous vers le dossier SPA :
-- cd vol/
+- cd spa/
 
 Puis, lancez un serveur local :
 - Exemple avec php : php -S localhost:8000
