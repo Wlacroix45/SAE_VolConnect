@@ -80,10 +80,19 @@ def get_all_localiser():
     return Localiser.query.all()
 
 def create_localiser(id_aeroport, id_compagnie):
+    existing = Localiser.query.get((id_aeroport, id_compagnie))
+    if existing is not None:
+        return existing
     localiser = Localiser(id_aeroport=id_aeroport, id_compagnie=id_compagnie)
     db.session.add(localiser)
     db.session.commit()
     return localiser
+
+def delete_localiser(id_aeroport, id_compagnie):
+    localiser = Localiser.query.get((id_aeroport, id_compagnie))
+    if localiser:
+        db.session.delete(localiser)
+        db.session.commit()
 
 def get_all_terminaux():
     return Terminal.query.all()

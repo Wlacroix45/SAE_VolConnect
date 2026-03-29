@@ -106,6 +106,13 @@ class LocaliserCollection(Resource):
     def post(self):
         create_localiser(id_aeroport=ns.payload["id_aeroport"], id_compagnie=ns.payload["id_compagnie"])
         return {}, 201
+
+@ns.route("/localisations/<int:id_aeroport>/<int:id_compagnie>")
+@ns.response(404, 'Localiser not found')
+class LocaliserItem(Resource):
+    def delete(self, id_aeroport, id_compagnie):
+        delete_localiser(id_aeroport, id_compagnie)
+        return {}, 204
     
 @ns.route("/terminaux")
 class TerminalCollection(Resource):
