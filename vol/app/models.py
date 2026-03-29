@@ -92,7 +92,7 @@ def get_all_localiser():
     return Localiser.query.all()
 
 def create_localiser(id_aeroport, id_compagnie):
-  """Crée une nouvelle localisation."""
+    """Crée une nouvelle localisation."""
     existing = Localiser.query.get((id_aeroport, id_compagnie))
     if existing is not None:
         return existing
@@ -102,7 +102,7 @@ def create_localiser(id_aeroport, id_compagnie):
     return localiser
 
 def delete_localiser(id_aeroport, id_compagnie):
-  """Supprimme une localisation."""
+    """Supprimme une localisation."""
     localiser = Localiser.query.get((id_aeroport, id_compagnie))
     if localiser:
         db.session.delete(localiser)
