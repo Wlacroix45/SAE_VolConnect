@@ -50,14 +50,41 @@ Vous avez maintenant connaissance de toutes les informations nécessaires pour u
 
 dans la catégorie Aéroport, vous allez pouvoir consulter tous les aéroports existants.
 
+![vols](../Livrable/img/aeroports_Flutter.png)
+
 En cliquant sur un aéroport, vous allez être redirigé sur sa page de détails, vous y verrez ses informations.
+
+![detail_vol](../Livrable/img/aeroport_details_Flutter.png)
 
 Vous pouvez rechercher des aéroports selon leurs noms, les villes/pays où ils sont situés.
 
+![filtre_vol](../Livrable/img/aeroport_filtre_Flutter.png)
+
 ### Compagnies
 
-Les compagnies sont filtrables seulement selon leur nom et on peut accéder à leurs détails en cliquant sur une compagnie, vous observerez alors toutes ses informations (nom et son identifiant).
+Dans la partie compagnies vous pourrez voir les compagnies existantes.
+
+![compagnies](../Livrable/img/compagnies_Flutter.png)
+
+en cliquant sur une compagnie, vous observerez alors toutes ses informations (nom et son identifiant).
+
+![detail_compagnie](../Livrable/img/compagnie_details_Flutter.png)
+
+Les compagnies sont filtrables seulement selon leur nom et on peut accéder à leurs détails 
+
+![filtre_compagnie](../Livrable/img/compagnie_filtre_Flutter.png)
 
 ### Vols
 
-Les vols sont filtrables sur leurs noms et sur le numéro de terminal, il ne faut pas rajouter le T présent dans la page principal. La page de détails est accessible en cliquant sur la carte du vol. Il y a la date d'arrivée, de départ, l'id du vol, de la compagnie et les terminaux.
+Sur la page vol vous pourrez accéder à la liste de tous les vols.
+
+![vols](../Livrable/img/vols_Flutter.png)
+
+
+La page de détails est accessible en cliquant sur la carte du vol. Il y a la date d'arrivée, de départ, l'id du vol, de la compagnie et les terminaux.
+
+![detail_vol](../Livrable/img/vol_details_Flutter.png)
+
+Les vols sont filtrables sur leurs noms et sur le numéro de terminal, il ne faut pas rajouter le T présent dans la page principal.
+
+![filtre_vol](../Livrable/img/vol_filtre_Flutter.png)
