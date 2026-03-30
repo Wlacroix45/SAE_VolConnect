@@ -45,3 +45,19 @@ Pour les vols, c'est un peu plus complexe pour la création, vous allez devoir d
 Vous avez maintenant connaissance de toutes les informations nécessaires pour utiliser correctement le site web, bon voyage !
 
 ## Application Mobile
+
+### Aéroport
+
+dans la catégorie Aéroport, vous allez pouvoir consulter tous les aéroports existants.
+
+En cliquant sur un aéroport, vous allez être redirigé sur sa page de détails, vous y verrez ses informations.
+
+Vous pouvez rechercher des aéroports selon leurs noms, les villes/pays où ils sont situés.
+
+### Compagnies
+
+Les compagnies sont filtrables seulement selon leur nom et on peut accéder à leurs détails en cliquant sur une compagnie, vous observerez alors toutes ses informations (nom et son identifiant).
+
+### Vols
+
+Les vols sont filtrables sur leurs noms et sur le numéro de terminal, il ne faut pas rajouter le T présent dans la page principal. La page de détails est accessible en cliquant sur la carte du vol. Il y a la date d'arrivée, de départ, l'id du vol, de la compagnie et les terminaux.
