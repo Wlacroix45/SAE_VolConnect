@@ -34,11 +34,23 @@ Vous aurez alors installé toutes les dépendances nécessaires pour utiliser le
 Enfin, vous pouvez lancer le serveur avec la commande suivante :
 - flask run
 
-Pour lancer les tests coverage, sur un nouveau terminal 
+Pour lancer les tests coverage de l'API REST vous devez aller dans le dossier vol/
+- cd vol/
+
+Puis lancez les tests:
+- coverage run -m pytest
+
+Pour générer les résulats: 
+- coverage report -m
+
+Vous pouvez en générer une page HTML:
+- coverage HTML (Dossier htmlcov créé dans le dossier vol/)
+- Ouvir le fichier index.html sur votre navigateur
+
 ## Lancement SPA
 
 Une fois le serveur lancé, vous pourrez alors lancer la SPA. Pour cela dirigez vous vers le dossier SPA :
-- cd spa/
+- cd SPA/
 
 Puis, lancez un serveur local :
 - Exemple avec php : php -S localhost:8000
