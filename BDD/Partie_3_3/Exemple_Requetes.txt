@@ -1,0 +1,12 @@
+Question 2 :
+
+ville_connectee(paris, Ville, HDep, HArr)?
+ville_connectee(paris, tokyo, HDep, HArr)?
+ville_connectee(paris, berlin, HDep, HArr)?
+
+
+Question 3 : 
+
+ville_connectee_conn_impair(paris, Ville, HDep, HArr)?
+ville_connectee_conn_impair(paris, tokyo, HDep, HArr)?
+ville_connectee_conn_impair(paris, rome, HDep, HArr)?

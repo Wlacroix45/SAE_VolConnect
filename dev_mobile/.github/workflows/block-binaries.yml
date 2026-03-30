@@ -1,0 +1,44 @@
+name: Block Binary Artifacts
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  check-binaries:
+    runs-on:  ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Check for unauthorized binaries
+        run: |
+          # Extensions autorisées
+          ALLOWED_EXTS=".png .jpg .jpeg .gif .ico"
+          
+          # Récupère tous les fichiers binaires dans la PR
+          BINARY_FILES=$(git diff --diff-filter=ACMR --name-only origin/${{ github.base_ref }}... HEAD | \
+            xargs -I {} file --mime-type {} 2>/dev/null | \
+            grep 'application/octet-stream\|application/x-executable' | \
+            cut -d: -f1)
+          
+          INVALID_FOUND=0
+          
+          if [ -n "$BINARY_FILES" ]; then
+            for file in $BINARY_FILES; do
+              ext=".${file##*.}"
+              if [[ ! " $ALLOWED_EXTS " =~ " $ext " ]]; then
+                echo "- Unauthorized binary file detected: $file"
+                INVALID_FOUND=1
+              fi
+            done
+          fi
+          
+          if [ $INVALID_FOUND -eq 1 ]; then
+            echo ""
+            echo "Allowed extensions:  $ALLOWED_EXTS"
+            exit 1
+          fi
+          
+          echo "+ No unauthorized binary artifacts found"

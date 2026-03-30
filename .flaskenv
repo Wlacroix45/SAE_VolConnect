@@ -1,0 +1,2 @@
+FLASK_APP = vol/app
+FLASK_DEBUG =1

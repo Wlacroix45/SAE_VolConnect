@@ -1,0 +1,11 @@
+[run]
+omit =
+    app/commands.py
+    */app/commands.py
+    vol/app/commands.py
+
+[report]
+omit =
+    app/commands.py
+    */app/commands.py
+    vol/app/commands.py
