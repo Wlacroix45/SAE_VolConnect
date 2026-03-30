@@ -1,0 +1,240 @@
+% Faits de base: vols, équipages, indices de qualité
+vol(af123, paris_madrid, 1, 2, airfrance, t1, t2, paris, madrid, france, espagne).
+equipage(af123, dupont, pilote).
+equipage(af123, martin, steward).
+indice_qualite(af123, carbone, 2, 5).
+indice_qualite(af123, securite, 4, 3).
+indice_qualite(af123, prix, 2, 2).
+
+vol(v001, vol_paris_londres, 3, 4, airfrance, terminal_2, terminal_5, paris, london, france, uk).
+equipage(v001, dupont, pilote).
+equipage(v001, martin, copilote).
+equipage(v001, durand, hotesse).
+indice_qualite(v001, carbone, 3, 4).
+indice_qualite(v001, securite, 2, 4).
+indice_qualite(v001, prix, 3, 3).
+
+vol(v002, vol_paris_new_york, 5, 6, airfrance, terminal_2, terminal_4, paris, new_york, france, usa).
+equipage(v002, leroy, pilote).
+equipage(v002, bernard, copilote).
+equipage(v002, petit, hotesse).
+equipage(v002, roux, steward).
+indice_qualite(v002, carbone, 4, 3).
+indice_qualite(v002, securite, 3, 4).
+indice_qualite(v002, prix, 2, 3).
+
+vol(v003, vol_london_tokyo, 7, 8, british_airways, terminal_5, terminal_2, london, tokyo, uk, japan).
+equipage(v003, smith, pilote).
+equipage(v003, johnson, copilote).
+equipage(v003, williams, hotesse).
+indice_qualite(v003, carbone, 4, 4).
+indice_qualite(v003, securite, 3, 5).
+indice_qualite(v003, prix, 2, 2).
+
+vol(v004, vol_berlin_madrid, 9, 10, lufthansa, terminal_1, terminal_4, berlin, madrid, germany, spain).
+equipage(v004, muller, pilote).
+equipage(v004, schmidt, copilote).
+equipage(v004, fischer, hotesse).
+equipage(v004, weber, steward).
+indice_qualite(v004, carbone, 2, 3).
+indice_qualite(v004, securite, 2, 4).
+indice_qualite(v004, prix, 3, 4).
+
+vol(v005, vol_rome_amsterdam, 11, 12, alitalia, terminal_3, terminal_2, rome, amsterdam, italy, netherlands).
+equipage(v005, rossi, pilote).
+equipage(v005, ferrari, copilote).
+equipage(v005, esposito, hotesse).
+indice_qualite(v005, carbone, 3, 3).
+indice_qualite(v005, securite, 3, 5).
+indice_qualite(v005, prix, 3, 4).
+
+vol(v006, vol_sydney_singapore, 13, 14, qantas, terminal_1, terminal_3, sydney, singapore, australia, singapore).
+equipage(v006, brown, pilote).
+equipage(v006, davis, copilote).
+equipage(v006, miller, hotesse).
+equipage(v006, wilson, steward).
+indice_qualite(v006, carbone, 3, 4).
+indice_qualite(v006, securite, 2, 4).
+indice_qualite(v006, prix, 3, 4).
+
+vol(v007, vol_dubai_cairo, 15, 16, emirates, terminal_3, terminal_2, dubai, cairo, uae, egypt).
+equipage(v007, al_farsi, pilote).
+equipage(v007, al_mansoori, copilote).
+equipage(v007, al_zahra, hotesse).
+indice_qualite(v007, carbone, 3, 4).
+indice_qualite(v007, securite, 3, 5).
+indice_qualite(v007, prix, 3, 4).
+
+vol(v008, vol_toronto_vancouver, 17, 18, air_canada, terminal_1, terminal_2, toronto, vancouver, canada, canada).
+equipage(v008, thompson, pilote).
+equipage(v008, anderson, copilote).
+equipage(v008, campbell, hotesse).
+equipage(v008, stewart, steward).
+indice_qualite(v008, carbone, 2, 3).
+indice_qualite(v008, securite, 2, 4).
+indice_qualite(v008, prix, 3, 4).
+
+vol(v009, vol_mexico_city_lima, 19, 20, aeromexico, terminal_2, terminal_1, mexico_city, lima, mexico, peru).
+equipage(v009, garcia, pilote).
+equipage(v009, rodriguez, copilote).
+equipage(v009, martinez, hotesse).
+indice_qualite(v009, carbone, 3, 4).
+indice_qualite(v009, securite, 2, 4).
+indice_qualite(v009, prix, 3, 3).
+
+vol(v010, vol_sao_paulo_buenos_aires, 21, 22, latam, terminal_3, terminal_a, sao_paulo, buenos_aires, brazil, argentina).
+equipage(v010, silva, pilote).
+equipage(v010, santos, copilote).
+equipage(v010, oliveira, hotesse).
+equipage(v010, pereira, steward).
+indice_qualite(v010, carbone, 3, 3).
+indice_qualite(v010, securite, 2, 4).
+indice_qualite(v010, prix, 2, 3).
+
+vol(v011, vol_mumbai_delhi, 23, 24, air_india, terminal_2, terminal_3, mumbai, delhi, india, india).
+equipage(v011, patel, pilote).
+equipage(v011, sharma, copilote).
+equipage(v011, singh, hotesse).
+indice_qualite(v011, carbone, 2, 3).
+indice_qualite(v011, securite, 3, 4).
+indice_qualite(v011, prix, 3, 4).
+
+vol(v012, vol_london_berlin, 9, 10, lufthansa, terminal_5, terminal_1, london, berlin, uk, germany).
+equipage(v012, clark, pilote).
+equipage(v012, lewis, copilote).
+indice_qualite(v012, carbone, 3, 4).
+indice_qualite(v012, securite, 3, 4).
+indice_qualite(v012, prix, 3, 3).
+
+vol(v013, vol_berlin_rome, 11, 12, alitalia, terminal_1, terminal_3, berlin, rome, germany, italy).
+equipage(v013, keller, pilote).
+equipage(v013, hoffman, copilote).
+indice_qualite(v013, carbone, 3, 4).
+indice_qualite(v013, securite, 3, 5).
+indice_qualite(v013, prix, 2, 3).
+
+vol(v014, vol_rome_tokyo, 13, 14, alitalia, terminal_3, terminal_2, rome, tokyo, italy, japan).
+equipage(v014, ricci, pilote).
+equipage(v014, costa, copilote).
+indice_qualite(v014, carbone, 4, 4).
+indice_qualite(v014, securite, 3, 5).
+indice_qualite(v014, prix, 2, 3).
+
+vol(v015, vol_new_york_tokyo, 9, 15, airfrance, terminal_4, terminal_2, new_york, tokyo, usa, japan).
+equipage(v015, adams, pilote).
+equipage(v015, bailey, copilote).
+indice_qualite(v015, carbone, 4, 4).
+indice_qualite(v015, securite, 3, 4).
+indice_qualite(v015, prix, 2, 3).
+
+vol(v016, vol_madrid_london, 5, 6, iberia, terminal_4, terminal_5, madrid, london, spain, uk).
+equipage(v016, navarro, pilote).
+equipage(v016, ortega, copilote).
+indice_qualite(v016, carbone, 3, 3).
+indice_qualite(v016, securite, 3, 4).
+indice_qualite(v016, prix, 3, 3).
+
+vol(v017, vol_paris_berlin, 4, 5, airfrance, terminal_2, terminal_1, paris, berlin, france, germany).
+equipage(v017, simon, pilote).
+equipage(v017, garin, copilote).
+indice_qualite(v017, carbone, 3, 4).
+indice_qualite(v017, securite, 3, 4).
+indice_qualite(v017, prix, 3, 3).
+
+%Question 2.
+
+% Ordre temporel generique base sur le successeur.
+succ(1,2).
+succ(2,3).
+succ(3,4).
+succ(4,5).
+succ(5,6).
+succ(6,7).
+succ(7,8).
+succ(8,9).
+succ(9,10).
+succ(10,11).
+succ(11,12).
+succ(12,13).
+succ(13,14).
+succ(14,15).
+succ(15,16).
+succ(16,17).
+succ(17,18).
+succ(18,19).
+succ(19,20).
+succ(20,21).
+succ(21,22).
+succ(22,23).
+succ(23,24).
+succ(24,25).
+succ(25,26).
+succ(26,27).
+succ(27,28).
+succ(28,29).
+succ(29,30).
+succ(30,31).
+succ(31,32).
+succ(32,33).
+succ(33,34).
+succ(34,35).
+succ(35,36).
+succ(36,37).
+succ(37,38).
+succ(38,39).
+succ(39,40).
+
+% Domaine des heures (lié aux faits succ)
+heure(X) :- succ(X, _).
+heure(X) :- succ(_, X).
+
+% <= : base + transitivité
+avant_ou_egal(X, Y) :- succ(X, Y).
+avant_ou_egal(X, Z) :- succ(X, Y), avant_ou_egal(Y, Z).
+
+% Réflexivité sûre (X est lié par heure(X))
+avant_ou_egal(X, X) :- heure(X).
+
+trajet(VilleDep, VilleArr, HDep, HArr) :-
+vol(Id, Nom, HDep, HArr, Comp, TermDep, TermArr, VilleDep, VilleArr, PaysDep, PaysArr).
+
+trajet(VilleDep, VilleArr, HDep, HArr) :-
+vol(Id1, Nom1, HDep1, HArr1, Comp1, TermDep1, TermArr1, VilleDep, VilleInter, PaysDep1, PaysInter1),
+trajet(VilleInter, VilleArr, HDep2, HArr2),
+avant_ou_egal(HArr1, HDep2),
+HDep = HDep1,
+HArr = HArr2,
+VilleDep != VilleArr.
+
+ville_connectee(VilleDep, VilleArr, HDep, HArr) :-
+trajet(VilleDep, VilleArr, HDep, HArr),
+VilleDep != VilleArr.
+
+%Question 3.
+
+% 0 connexion -> pair
+trajet_pair_conn(VilleDep, VilleArr, HDep, HArr) :-
+  vol(Id, Nom, HDep, HArr, Comp, TermDep, TermArr, VilleDep, VilleArr, PaysDep, PaysArr).
+
+% pair -> impair en ajoutant 1 connexion
+trajet_impair_conn(VilleDep, VilleArr, HDep, HArr) :-
+  vol(Id1, Nom1, HDep1, HArr1, Comp1, TermDep1, TermArr1, VilleDep, VilleInter, PaysDep1, PaysInter1),
+  trajet_pair_conn(VilleInter, VilleArr, HDep2, HArr2),
+  avant_ou_egal(HArr1, HDep2),
+  HDep = HDep1,
+  HArr = HArr2,
+  VilleDep != VilleArr.
+
+% impair -> pair en ajoutant 1 connexion
+trajet_pair_conn(VilleDep, VilleArr, HDep, HArr) :-
+  vol(Id1, Nom1, HDep1, HArr1, Comp1, TermDep1, TermArr1, VilleDep, VilleInter, PaysDep1, PaysInter1),
+  trajet_impair_conn(VilleInter, VilleArr, HDep2, HArr2),
+  avant_ou_egal(HArr1, HDep2),
+  HDep = HDep1,
+  HArr = HArr2,
+  VilleDep != VilleArr.
+
+ville_connectee_conn_impair(VilleDep, VilleArr, HDep, HArr) :-
+  trajet_impair_conn(VilleDep, VilleArr, HDep, HArr),
+  VilleDep != VilleArr.
+
