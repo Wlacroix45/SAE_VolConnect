@@ -8,10 +8,17 @@ Gestionnaire Git : LACROIX Wyatt
 
 Contrôleur de qualité : GUERRIER Titouan
 
+## Démonstration
+
+Vous avez à disposition une vidéo de démonstration, qui montre le fonctionnement de la SPA et de l'application mobile. Elle est accessible depuis le lien suivant :
+- https://youtu.be/1mcJ-enVnOw
+
 ## Prérequis
 
 - Vous devez avoir installé python 
 - Vous devez pouvoir lancer un serveur local (Ex: php)
+- Vous devez avoir installé flutter et dart à minimat (mieux avec Android studio)
+- Il faut un dossier sdk
 
 ## Lancement Serveur API
 
@@ -51,16 +58,13 @@ Puis, lancez un serveur local :
 Sur votre navigateur, en mettant comme URL http://localhost:8000/ vous accéderez à la SPA et pourrez effectuez toutes les actions que vous souhaitez (cf Manuel Utilisateur présent dans le dossier Livrable/)
 
 ## Lancement Application Mobile
+Pour lancer l'application, il faut lancer un terminal et vous dirigez vers le dossier android : 
+- cd dev_mobile/
 
-## Commande ora12
+Vous pourrez alors lancer l'application Web
+- flutter run -d chrome 
 
-rlwrap sqlplus nom@ora12
+Si ça marche pas :
+- flutter run <"votre navigateur">
 
-si c'est votre première fois le mdp est votre nom
-
-pour supprimer toutes les tables indésirables utiliser la commande @./BDD/dropAll.sql .
-
-ensuite il faut vider la corbeille avec purge recyclebin; 
-
-et pour lancer le script sql @./BDD/MCD_ddl32.sql et @./BDD/donnees_32.sql
 
